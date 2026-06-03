@@ -8,19 +8,6 @@ A CLI scaffolding tool. Run one command and get a fully wired Svelte 5 project �
 
 ```bash
 npm create @aryagg/super-svelte-skeleton my-app
-```
-
-The CLI will ask one question before scaffolding:
-
-```
-Include Service Worker (offline support)? (Y/n):
-```
-
-- Press **Enter** or type `y` to include it (caching, offline queue, background sync)
-- Type `n` to skip it (leaner project, no `idb` dependency)
-
-Then:
-```bash
 cd my-app
 npm run dev
 ```
@@ -42,21 +29,15 @@ npm create @aryagg/super-svelte-skeleton my-app
          ▼
 3. cli.js checks: does "my-app" folder already exist? → exit if yes
 4. cli.js checks: does the "template" folder exist inside the package? → exit if no
-5. cli.js prompts: "Include Service Worker (offline support)? (Y/n)"
          │
          ▼
-6. cli.js copies everything from template/ → my-app/
+5. cli.js copies everything from template/ → my-app/
    (skips node_modules, .svelte-kit, .git, .claude)
-7. If the user said "n":
-   - deletes src/service-worker.ts and src/lib/sync-queue.ts
-   - removes "idb" from package.json dependencies
-   - patches axiosClient.ts: setAuthToken becomes a plain sync setter (no SW postMessage)
-   - patches http.ts: removes callWithQueue, processOfflineMode, isNetworkError
-8. cli.js updates my-app/package.json
+6. cli.js updates my-app/package.json
    - sets "name" to "my-app"
    - removes the "private" flag
-9. cli.js runs `npm install` inside my-app/
-10. cli.js prints "Done!" with next steps
+7. cli.js runs `npm install` inside my-app/
+8. cli.js prints "Done!" with next steps
 ```
 
 The filter in step 6 uses **relative** paths from the template root — not the absolute path — so it never accidentally matches `node_modules` from the npm cache folder itself.

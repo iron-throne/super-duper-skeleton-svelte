@@ -1,27 +1,28 @@
 :root {
-  --surface-primary:   #ffffff;  /* main surfaces, cards, panels */
-  --surface-secondary: #f9fafb; /* subtle background (Teams neutral) */
-  --surface-tertiary:  #e1dfdd; /* low-contrast background layer */
+  --surface-primary: #ffffff;
+  --surface-secondary: #fafafa;
+  --surface-tertiary: #f8f8f8;
 
-  --on-surface-primary:   #000000;  /* strong text on white */
-  --on-surface-secondary: #5e5253;  /* readable on light gray */
-  --on-surface-tertiary:  #606060;  /* readable on tertiary */
 
-  --semantic-success: #107c10; /* Teams green */
-  --semantic-warning: #f8d22a; /* Teams yellow */
-  --semantic-error:   #d13438; /* Teams red */
-  --semantic-info:    #6264a7; /* Teams info purple */
-  --semantic-accent:  #ca0613; /* accent red */
+  --on-surface-primary: #000000;
+  --on-surface-secondary: #5e5253;
+  --on-surface-tertiary: #606060;
 
-  --text-primary:   #000000;     /* strong text */
-  --text-secondary: #657487;     /* secondary text */
-  --text-tertiary:  #606060;     /* disabled / subtle text */
+  --semantic-success: #107c10;
+  --semantic-warning: #f8d22a;
+  --semantic-error: #d13438;
+  --semantic-info: #6264a7;
+  --semantic-accent: #ca0613;
 
-  --on-success: #ffffff; /* readable on dark green */
-  --on-warning: #000000; /* readable on yellow */
-  --on-error:   #ffffff; /* readable on red */
-  --on-info:    #ffffff; /* readable on purple */
-  --on-accent:  #ffffff; /* readable on accent red */
+  --text-primary: #000000;
+  --text-secondary: #657487;
+  --text-tertiary: #606060;
+
+  --on-success: #ffffff;
+  --on-warning: #000000;
+  --on-error: #ffffff;
+  --on-info: #ffffff;
+  --on-accent: #ffffff;
 
   --border-primary: #e1dfdd;
 }

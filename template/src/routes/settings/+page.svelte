@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { ArrowClockwise } from 'svelte-bootstrap-icons';
-	import Header from '$lib/components/shared/Header.svelte';
 	import Form from '$lib/components/shared/Form.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
 	import { THEME_INPUTS } from '$lib/constants/settings';
 	import type { IFormField } from '$lib/types';
+	import Topbar from '$components/core/Topbar.svelte';
 
 
 	let fields = $state<IFormField[]>(structuredClone(THEME_INPUTS));
@@ -20,7 +20,7 @@
 </script>
 
 <div class="bg-surface-secondary flex size-full flex-col overflow-hidden">
-	<Header />
+	<Topbar />
 	<!-- ── Page Title Strip ── -->
 	<div class="bg-surface-secondary shrink-0 px-10 py-2.5">
 		<div class="flex items-center gap-4">

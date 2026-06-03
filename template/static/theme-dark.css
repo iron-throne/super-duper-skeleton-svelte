@@ -1,34 +1,30 @@
-/* Dark Theme — Microsoft Teams–inspired color system */
 :root {
-  /* ── Surface Colors (Teams-like) ───────────────── */
-  --surface-primary:   #3a3a3a; /* main interactive surfaces */
-  --surface-secondary: #2d2d2d; /* secondary panels, sidebars */
-  --surface-tertiary:  #1f1f1f; /* deep backgrounds, modals */
+  --surface-primary:   #1e2a3a;  /* cards, modals, elevated surfaces */
+  --surface-secondary: #151f2e;  /* panels, inputs, sidebars */
+  --surface-tertiary:  #0d1520;  /* page background / deepest layer */
 
-  /* On-surface (text on backgrounds) */
-  --on-surface-primary:   #ffffff; /* text on primary surface */
-  --on-surface-secondary: #d1d1d1; /* text on secondary surface */
-  --on-surface-tertiary:  #d1d1d1; /* text on tertiary surface */
+  --on-surface-primary:   #f1f5f9;
+  --on-surface-secondary: #94a3b8;
+  --on-surface-tertiary:  #64748b;
 
-  /* ── Semantic Colors (Teams tone) ─────────────── */
-  --semantic-success: #92c353; /* Teams green */
-  --semantic-warning: #f8d22a; /* Teams yellow */
-  --semantic-error:   #d13438; /* Teams red */
-  --semantic-info:    #5b5fc7; /* Teams info blue/purple */
-  --semantic-accent:  #b3b4e6; /* accent purple */
+  --semantic-success: #4ade80;
+  --semantic-warning: #fbbf24;
+  --semantic-error:   #f87171;
+  --semantic-info:    #818cf8;
 
-  /* ── Text Colors (Teams contrast levels) ──────── */
-  --text-primary:   #ffffff; /* primary text */
-  --text-secondary: #d1d1d1; /* secondary text */
-  --text-tertiary:  #9b9b9b; /* tertiary / disabled text */
+  /* fixed accent — brighter than light-mode red so it reads well on dark surfaces */
+  --semantic-accent: #e53e3e;
 
-  /* On-semantic (text on semantic backgrounds) */
-  --on-success: #000000; /* readable on green */
-  --on-warning: #000000; /* readable on yellow */
-  --on-error:   #ffffff; /* readable on red */
-  --on-info:    #ffffff; /* readable on info blue */
-  --on-accent:  #000000; /* readable on accent purple */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary:  #64748b;
 
-    --border-primary: #3c3c3c;
+  --on-success: #052e16;
+  --on-warning: #1c1002;
+  --on-error:   #450a0a;
+  --on-info:    #1e1b4b;
+  --on-accent:  #ffffff;
 
+  /* fixed border */
+  --border-primary: #2d3f55;
 }

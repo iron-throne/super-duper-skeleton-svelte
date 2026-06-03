@@ -1,7 +1,9 @@
 ﻿<script lang="ts">
 	import { asset, resolve } from '$app/paths';
+	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+	import * as m from '$lib/paraglide/messages';
 	import { MENU_ITEMS } from '$constants/layout';
 	import { LOGOUT_ROUTE, PROFILE_ROUTE } from '$lib/constants/pageRoutes';
 	import {
@@ -25,14 +27,14 @@
 		{
 			label: 'Profile',
 			icon: Person,
-			onclick: () => goto(PROFILE_ROUTE),
+			onclick: () => goto(resolve(PROFILE_ROUTE, {})),
 		},
 		{
 			label: 'Logout',
 			icon: BoxArrowRight,
 			danger: true,
 			divider: true,
-			onclick: () => goto(LOGOUT_ROUTE),
+			onclick: () => goto(resolve(LOGOUT_ROUTE, {})),
 		},
 	];
 
@@ -72,9 +74,9 @@
 				title="Home"
 			>
 				<img
-					alt="DAEP Logo"
+					alt="Logo"
 					class="size-full object-contain"
-					src={asset('/logo-daep.png')}
+					src={asset('/logo.svg')}
 				/>
 			</a>
 			<h5 class="font-bold whitespace-nowrap">{m.app_name()}</h5>

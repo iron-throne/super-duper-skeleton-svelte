@@ -11,7 +11,6 @@
 	import { onMount } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { fade } from 'svelte/transition';
-	import Header from '$lib/components/shared/Header.svelte';
 	import { THEME_FILES, THEMES_TABS } from '$lib/constants';
 	import { ETheme, type IGenericObject } from '$lib/types';
 	import axios from 'axios';
@@ -20,6 +19,7 @@
 	import TypographySettings from '$lib/components/settings/TypographySettings.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
 	import Tabs from '$lib/components/shared/Tabs.svelte';
+	import Topbar from '$components/core/Topbar.svelte';
 
 	type ThemeEntry = { name: string; value: ETheme; href: string; colors: IGenericObject };
 	type Tab = 'css' | 'preview';
@@ -228,7 +228,7 @@
 <input bind:this={fileInput} type="file" accept=".css" class="hidden" onchange={handleImport} />
 
 <div class="bg-surface-secondary flex size-full flex-col overflow-hidden">
-	<Header />
+	<Topbar />
 	<!-- ── Page Title Strip ── -->
 	<div class="bg-surface-secondary shrink-0 px-10 py-2.5">
 		<div class="flex items-center gap-4">

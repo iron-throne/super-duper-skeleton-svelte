@@ -2,8 +2,6 @@ import type { INavItem } from "$lib/types";
 import {
     Grid3x3Gap,
     Grid3x3GapFill,
-    Collection,
-    CollectionFill,
     Gear,
     GearFill,
     Grid,
@@ -19,16 +17,9 @@ export const MENU_ITEMS: INavItem[] = [
         selectedIcon: Grid3x3GapFill
     },
     {
-        label: "Catalog",
-        id: "catalog",
-        href: "/catalog",
-        icon: Collection,
-        selectedIcon: CollectionFill
-    },
-    {
-        label: "Settings",
-        id: "settings",
-        href: "/settings",
+        label: "Theme",
+        id: "theme",
+        href: "/theme",
         icon: Gear,
         selectedIcon: GearFill
     }

@@ -1,5 +1,10 @@
 import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { loadEnv } from 'vite';
+
+// Load environment variables based on NODE_ENV or default to 'development'
+const mode = process.env.NODE_ENV || 'development';
+const env = loadEnv(mode, process.cwd(), 'PUBLIC_');// Only load variables that start with PUBLIC_ to avoid exposing sensitive data
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -29,7 +34,7 @@ const config = {
 		// Allows deploying your app under a subfolder.
 		// Example: https://example.com/myapp → base = '/myapp'
 		paths: {
-			base: process.env.PUBLIC_BASE_PATH || ''
+			base: env.PUBLIC_BASE_PATH || ''
 		},
 		// Lets you write: import Button from '$components/Button.svelte'
 		// instead of: import Button from '../../../lib/components/Button.svelte'

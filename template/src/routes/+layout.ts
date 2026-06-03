@@ -1,4 +1,4 @@
-import { PUBLIC_CONFIG_ENV } from "$env/static/public";
+import { PUBLIC_CONFIG_ENV, PUBLIC_BASE_PATH } from "$env/static/public";
 import { configStore } from "$lib/stores/config.svelte.js";
 import { snackStore } from "$lib/stores/snackbar.svelte.js";
 import { ESnackType } from "$lib/types/core.js";
@@ -17,7 +17,7 @@ export const load: LayoutLoad = async ({ fetch }) => {
     }
 
     try {
-        const res = await fetch(`/config/config.${configEnv}.json`);
+        const res = await fetch(`${PUBLIC_BASE_PATH}/config/config.${configEnv}.json`);
 
         if (!res.ok) {
             throw new Error(`Failed to load config.${configEnv}.json`);

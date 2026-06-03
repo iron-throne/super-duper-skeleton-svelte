@@ -21,15 +21,6 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "$lib": [
-        "./src/lib"
-      ],
-      "$lib/*": [
-        "./src/lib/*"
-      ]
-    },
     "skipLibCheck": true,
     "sourceMap": true,
     "resolveJsonModule": true,

@@ -1,6 +1,6 @@
 {
   "name": "@aryagg/create-super-svelte-skeleton",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "private": false,
   "bin": {

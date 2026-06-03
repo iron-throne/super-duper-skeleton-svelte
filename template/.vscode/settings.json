@@ -1,0 +1,29 @@
+{
+    "editor.formatOnSave": true,
+
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+
+    "[typescript]": {
+        "editor.defaultFormatter": "TypeScriptTeam.native-preview"
+    },
+
+    "[javascript]": {
+        "editor.defaultFormatter": "TypeScriptTeam.native-preview"
+    },
+
+    "[css]": {
+        "editor.defaultFormatter": "michelemelluso.code-beautifier"
+    },
+
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "prettier.requireConfig": true
+}

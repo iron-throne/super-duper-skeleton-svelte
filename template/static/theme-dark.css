@@ -1,0 +1,34 @@
+/* Dark Theme — Microsoft Teams–inspired color system */
+:root {
+  /* ── Surface Colors (Teams-like) ───────────────── */
+  --surface-primary:   #3a3a3a; /* main interactive surfaces */
+  --surface-secondary: #2d2d2d; /* secondary panels, sidebars */
+  --surface-tertiary:  #1f1f1f; /* deep backgrounds, modals */
+
+  /* On-surface (text on backgrounds) */
+  --on-surface-primary:   #ffffff; /* text on primary surface */
+  --on-surface-secondary: #d1d1d1; /* text on secondary surface */
+  --on-surface-tertiary:  #d1d1d1; /* text on tertiary surface */
+
+  /* ── Semantic Colors (Teams tone) ─────────────── */
+  --semantic-success: #92c353; /* Teams green */
+  --semantic-warning: #f8d22a; /* Teams yellow */
+  --semantic-error:   #d13438; /* Teams red */
+  --semantic-info:    #5b5fc7; /* Teams info blue/purple */
+  --semantic-accent:  #b3b4e6; /* accent purple */
+
+  /* ── Text Colors (Teams contrast levels) ──────── */
+  --text-primary:   #ffffff; /* primary text */
+  --text-secondary: #d1d1d1; /* secondary text */
+  --text-tertiary:  #9b9b9b; /* tertiary / disabled text */
+
+  /* On-semantic (text on semantic backgrounds) */
+  --on-success: #000000; /* readable on green */
+  --on-warning: #000000; /* readable on yellow */
+  --on-error:   #ffffff; /* readable on red */
+  --on-info:    #ffffff; /* readable on info blue */
+  --on-accent:  #000000; /* readable on accent purple */
+
+    --border-primary: #3c3c3c;
+
+}

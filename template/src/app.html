@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="%paraglide.lang%" dir="%paraglide.dir%">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="%sveltekit.assets%/favicon.svg?v=2" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>%sveltekit.env.PUBLIC_SITE_NAME%</title>
+
+	<meta name="description" content="%sveltekit.env.PUBLIC_SITE_DESCRIPTION%" />
+
+	<meta name="theme-color" content="#3b82f6" />
+	<meta name="color-scheme" content="light dark" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet" />
+
+	%sveltekit.head%
+
+	<link id="theme-style" rel="stylesheet" href="/theme-light.css" />
+
+	<script>
+		if (localStorage.getItem('theme') === 'dark') {
+			document.getElementById('theme-style').href = '/theme-dark.css';
+		}
+	</script>
+</head>
+
+<body data-sveltekit-preload-data="hover">
+	<div style="display: contents">%sveltekit.body%</div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+/* 1️⃣ All imports FIRST — absolutely everything */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "@fontsource/fira-mono";
+@import "./global.css";
+@import "./components.css";
+/* 3️⃣ Tailwind engine */
+@import "tailwindcss";
+
+/* 2️⃣ Tailwind config */
+@config "./tailwind.config.ts";

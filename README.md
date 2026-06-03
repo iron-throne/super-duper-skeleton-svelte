@@ -255,6 +255,9 @@ Create `src/lib/stores/your-store.svelte.ts` using Svelte 5 Runes (`$state`, `$d
 ```bash
 # 1. Make changes inside template/ or cli.js
 # 2. Bump the version in package.json
+npm version patch   # 1.0.0 → 1.0.1
+npm version minor   # 1.0.0 → 1.1.0
+npm version major   # 1.0.0 → 2.0.0
 # 3. Publish
 npm publish --access public
 

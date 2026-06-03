@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node cli.js test-app)",
+      "Bash(ls \"C:\\\\Users\\\\tmp200\\\\AppData\\\\Local\\\\npm-cache\\\\_npx\\\\4e8d8f003984bfd2\\\\node_modules\\\\@aryagg\\\\create-super-svelte-skeleton\\\\template\")",
+      "Read(//c/Users/tmp200/AppData/Local/npm-cache/_npx/4e8d8f003984bfd2/node_modules/@aryagg/create-super-svelte-skeleton/template/**)"
+    ]
+  }
+}

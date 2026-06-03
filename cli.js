@@ -29,16 +29,22 @@ console.log(`Creating project: ${target}`);
 const SKIP = ["node_modules", ".svelte-kit", ".git", ".claude"];
 
 try {
-  fs.cpSync(templateDir, target, {
-    recursive: true,
-    // Filter runs on absolute paths, so we use relative path from templateDir
+fs.cpSync(templateDir, target, {
+	recursive: true,
+      // Filter runs on absolute paths, so we use relative path from templateDir
     // to avoid false matches against "node_modules" in the npm cache path itself
-    filter: (src) => {
-      const rel = path.relative(templateDir, src);
-      const topLevel = rel.split(path.sep)[0];
-      return !SKIP.includes(topLevel);
-    },
-  });
+	filter: (src) => {
+		const rel = path.relative(templateDir, src);
+
+		// Keep root itself
+		if (!rel) return true;
+
+		const parts = rel.split(path.sep);
+
+		// Skip only actual directories named in SKIP_DIRS
+		return !parts.some((part) => SKIP_DIRS.has(part));
+	}
+});
 
   // Rename the package to match the new project folder and drop the private flag
   const pkgPath = path.join(target, "package.json");

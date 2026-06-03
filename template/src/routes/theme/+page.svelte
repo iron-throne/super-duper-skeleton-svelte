@@ -299,7 +299,7 @@
 				</div>
 				<!-- Theme switcher -->
 				<div
-					class="bg-surface-secondary flex shrink-0 gap-0.5 rounded-xl border p-0.5 text-xs"
+					class="bg-surface-secondary flex shrink-0 gap-0.5 rounded-xl p-0.5 text-xs"
 				>
 					<Tabs tabs={THEMES_TABS} bind:active={selectedTheme} />
 				</div>
@@ -424,7 +424,7 @@
 			<div
 				class="border-border-primary/60 flex shrink-0 items-center gap-2 px-4 py-3"
 			>
-				<div class="bg-surface-secondary flex gap-0.5 rounded-xl border p-0.5 text-xs">
+				<div class="bg-surface-secondary flex gap-0.5 rounded-xl p-0.5 text-xs">
 					<Tabs tabs={rightTabs} bind:active={rightTab} />
 				</div>
 

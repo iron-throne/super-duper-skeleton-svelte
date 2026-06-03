@@ -26,7 +26,7 @@ if (!fs.existsSync(templateDir)) {
 console.log(`Creating project: ${target}`);
 
 // These top-level folders inside the template are dev/build artifacts — skip them
-const SKIP = ["node_modules", ".svelte-kit", ".git", ".claude"];
+const SKIP_DIRS = ["node_modules", ".svelte-kit", ".git", ".claude"];
 
 try {
 fs.cpSync(templateDir, target, {

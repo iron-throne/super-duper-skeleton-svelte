@@ -145,7 +145,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {#each features as f, i (i)}
-                <div class="group flex items-start gap-4 p-5 rounded-2xl bg-surface-secondary border border-border-primary hover:border-accent/40 hover:bg-accent/[0.03] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
+                <div class="group flex items-start gap-4 p-5 rounded-2xl bg-surface-secondary border border-border-primary hover:border-accent/40 hover:bg-accent/3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
 
                     <!-- Icon bubble -->
                     <div class="flex-none w-10 h-10 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center transition-colors shrink-0 text-accent">

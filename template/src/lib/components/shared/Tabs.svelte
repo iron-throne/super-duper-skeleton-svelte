@@ -6,9 +6,13 @@
 		tabs,
 		active = $bindable(),
 		children,
+		parentClass,
+		tabClass
 	}: {
 		tabs: Tab[];
 		active: string;
+		parentClass?: string;
+		tabClass?: string;
 		children?: Snippet;
 	} = $props();
 
@@ -18,7 +22,7 @@
 
 <div>
 	<!-- Tab bar -->
-	<div role="tablist" class="bg-surface-secondary flex w-fit rounded-xl p-1">
+	<div role="tablist" class="bg-surface-primary flex w-fit rounded-full p-1 text-xs shadow {parentClass}">
 		{#each tabs as tab (tab.id)}
 			<button
 				role="tab"
@@ -27,9 +31,9 @@
 				onclick={() => {
 					if (!tab.disabled) active = tab.id;
 				}}
-				class="rounded-lg px-3 py-1.5 font-medium transition-all duration-200 {tab.id ===
+				class="rounded-full px-4 py-1.5 font-medium transition-all duration-300 text-xs {tabClass} {tab.id ===
 				active
-					? 'bg-accent text-on-accent shadow-sm'
+					? 'bg-primary text-surface-primary shadow-sm'
 					: 'text-secondary hover:text-primary border-0 bg-transparent'}"
 			>
 				{#if tab.icon}
@@ -39,9 +43,9 @@
 				{#if tab.badge != null}
 					<span
 						class="ml-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none font-semibold
-                        {active === tab.id
-							? 'bg-white/20 text-white'
-							: 'bg-surface-tertiary text-content-secondary'}"
+                        {tab.id === active
+							? 'bg-primary text-surface-primary shadow-sm'
+							: 'text-secondary hover:text-primary border-0 bg-transparent'}"
 					>
 						{tab.badge}
 					</span>

@@ -53,7 +53,7 @@
         transition:fade={{ duration: 180 }}
     >
         <!-- Dim layer -->
-        <div
+        <div aria-role="button"
             class="absolute inset-0 bg-black/50"
             onclick={handleBackdrop}
         ></div>

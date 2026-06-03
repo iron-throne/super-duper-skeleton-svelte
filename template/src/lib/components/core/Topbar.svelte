@@ -36,7 +36,7 @@
 		},
 	];
 
-	let currentLocale = $state('en');
+	let currentLocale: ELocale =  $state(ELocale.EN);
 
 	onMount(() => {
 		if (browser) {

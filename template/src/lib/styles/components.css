@@ -176,7 +176,7 @@
     input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):focus,
     textarea:focus,
     select:focus {
-        @apply bg-surface-primary ring-2 ring-accent/40;
+        @apply bg-surface-primary ring-2 ring-accent/50 ;
     }
 
     input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):disabled,
@@ -235,7 +235,6 @@
         @apply w-full cursor-pointer accent-accent;
     }
 
-
     /* ══════════════ FILE INPUT ══════════════ */
 
     input[type="file"] {
@@ -281,6 +280,11 @@
         @apply border-border-primary bg-transparent text-secondary;
     }
 
+     [data-badge="primary"] {
+        @apply border-border-primary bg-surface-primary text-secondary;
+    }
+
+
 
     /* ══════════════ ALERTS ══════════════ */
 
@@ -308,7 +312,7 @@
     /* ══════════════ CARD ══════════════ */
 
     .section-label {
-        @apply mb-3 text-[11px] font-semibold uppercase tracking-[0.07em] text-tertiary;
+        @apply text-[11px] font-semibold uppercase tracking-[0.07em] text-tertiary;
     }
 
     .card {

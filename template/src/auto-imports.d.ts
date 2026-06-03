@@ -18,10 +18,11 @@ declare global {
   const get: typeof import('svelte/store').get
   const getAllContexts: typeof import('svelte').getAllContexts
   const getContext: typeof import('svelte').getContext
-  const goto: typeof import('@sveltejs/kit').goto
+  const goto: typeof import('$app/navigation').goto
   const hasContext: typeof import('svelte').hasContext
-  const invalidate: typeof import('@sveltejs/kit').invalidate
-  const invalidateAll: typeof import('@sveltejs/kit').invalidateAll
+  const invalidate: typeof import('$app/navigation').invalidate
+  const invalidateAll: typeof import('$app/navigation').invalidateAll
+  const m: typeof import('$lib/paraglide/messages')
   const onDestroy: typeof import('svelte').onDestroy
   const onMount: typeof import('svelte').onMount
   const readable: typeof import('svelte/store').readable

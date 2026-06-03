@@ -143,7 +143,7 @@
     <!-- ── RADIO ── -->
     {:else if field.type === EInputType.RADIO}
         <div class="flex flex-col gap-2">
-            {#each (field.options ?? []) as opt}
+            {#each (field.options ?? []) as opt, oInd (oInd)}
                 <label class="flex items-center gap-3 cursor-pointer group">
                     <input
                         type="radio"
@@ -196,7 +196,7 @@
             {#if field.placeholder}
                 <option value="" disabled selected class="text-content-tertiary">{field.placeholder}</option>
             {/if}
-            {#each (field.options ?? []) as opt}
+            {#each (field.options ?? []) as opt, oInd (oInd)}
                 <option value={opt.value} class="bg-surface-primary text-content-primary">{opt.label}</option>
             {/each}
         </select>
@@ -219,7 +219,7 @@
     {:else if field.type === EInputType.MULTISELECT || field.type === EInputType.MULTISELECT_ADDNEW}
         <div class="flex flex-col gap-2">
             <div class="flex flex-wrap gap-2 p-2 rounded-lg border  bg-surface-secondary min-h-11">
-                {#each (field.options ?? []) as opt}
+                {#each (field.options ?? []) as opt, oInd (oInd)}
                     {@const selected = Array.isArray(field.value) && field.value.includes(opt.value)}
                     <button
                         type="button"
@@ -257,7 +257,7 @@
             <!-- Remove options from list -->
             {#if field.options?.length}
                 <div class="flex flex-wrap gap-1">
-                    {#each (field.options ?? []) as opt}
+                    {#each (field.options ?? []) as opt, oInd (oInd)}
                         <span class="flex items-center gap-1 text-xs text-content-tertiary bg-surface-secondary rounded px-2 py-0.5">
                             {opt.label}
                             {#if field.type === EInputType.MULTISELECT_ADDNEW}

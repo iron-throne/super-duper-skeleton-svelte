@@ -25,11 +25,11 @@ export default defineConfig({
 
         // Auto-import SvelteKit functions
         {
-          '@sveltejs/kit': [
-            'goto',          // navigate programmatically
-            'invalidate',    // revalidate data
-            'invalidateAll', // revalidate everything
-            'redirect',      // throw redirect
+          '$app/navigation': ['goto', 'invalidate', 'invalidateAll'],
+          '@sveltejs/kit': ['redirect'],
+        }, {
+          '$lib/paraglide/messages': [
+            ['*', 'm']   // import * as m from '$lib/paraglide/messages'
           ]
         }
       ],

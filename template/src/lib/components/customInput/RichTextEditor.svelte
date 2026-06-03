@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable svelte/no-dom-manipulating */
 	import { DEBOUNCE_DELAY, FORMAT_OPTIONS, RICHTEXT_ICONS } from '$lib/constants';
 	import type { ITextFormat, IRichTextIcon, TextFormatKeys } from '$lib/types/richTexteditor';
 	import { onMount } from 'svelte';
@@ -768,7 +769,7 @@
 		class:border-red-300={errorMsg}
 	>
 		<!-- Format Options -->
-		{#each FORMAT_OPTIONS as formatOption}
+		{#each FORMAT_OPTIONS as formatOption, oInd (oInd)}
 			{#if formatOption.type === 'select'}
 				<select
 					class="rounded border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -781,7 +782,7 @@
 						)}
 				>
 					<option value="" disabled>{formatOption.title}</option>
-					{#each formatOption.options ?? [] as option}
+					{#each formatOption.options ?? [] as option, i (i)}
 						<option value={option.value}>{option.label}</option>
 					{/each}
 				</select>
@@ -812,7 +813,7 @@
 		<!-- Formatting Icons -->
 		{#key selTick}
 			<div class="flex flex-wrap gap-1">
-				{#each RICHTEXT_ICONS as icon}
+				{#each RICHTEXT_ICONS as icon, i (i)}
 					<button
 						type="button"
 						onclick={() => onIconClick(icon)}

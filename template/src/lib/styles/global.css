@@ -1,6 +1,7 @@
 
 :root {
 --font-body: 'Inter', system-ui, sans-serif;
+--font-heading:Space Grotesk,ui-sans-serif,system-ui,sans-serif;
 }
 *,
 *::before,
@@ -30,13 +31,9 @@ body {
 
 /* Improve link behavior */
 a {
-    color: var(--surface-primary);
     text-decoration: none;
     transition: color 0.15s ease;
-}
-
-a:hover {
-    color: var(--surface-secondary);
+    @apply text-sm hover:text-accent hover:font-medium;
 }
 
 /* Buttons reset */
@@ -48,7 +45,6 @@ button {
 input,
 textarea,
 select {
-    font-family: inherit;
     color: var(--text-primary);
     background-color: var(--surface-secondary);
 }

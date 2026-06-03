@@ -1,6 +1,7 @@
+import type { RequestEvent } from '@sveltejs/kit';
 import { deLocalizeUrl } from '$lib/paraglide/runtime';
 
-export const reroute = (request) => deLocalizeUrl(request.url).pathname;
+export const reroute = (request: RequestEvent) => deLocalizeUrl(request.url).pathname;
 // If you export a function named reroute, SvelteKit will automatically run it on every request before routing.
 // Rerouting helper for Paraglide i18n.
 // This removes the locale prefix from the URL (e.g. /en/about → /about)

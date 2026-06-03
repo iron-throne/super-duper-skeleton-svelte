@@ -35,7 +35,7 @@
 	<div
 		role="alert"
 		transition:fly={{ y: 16, duration: 280, easing: cubicOut }}
-		class="fixed bottom-6 left-1/2 z-[1000] w-[22rem] max-w-[calc(100vw-2rem)] -translate-x-1/2"
+		class="fixed bottom-6 left-1/2 z-1000 w-88 max-w-[calc(100vw-2rem)] -translate-x-1/2"
 	>
 		<div
 			data-alert={_snackbar.type}
@@ -59,7 +59,7 @@
 			</div>
 
 			<div
-				class="absolute bottom-0 left-0 h-[2px] bg-current opacity-25"
+				class="absolute bottom-0 left-0 h-0.5 bg-current opacity-25"
 				style="
 					width:100%;
 					animation:snack-shrink {duration}ms linear forwards;

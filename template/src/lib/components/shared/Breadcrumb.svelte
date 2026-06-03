@@ -50,7 +50,7 @@
                 </a>
             </li>
 
-            {#each crumbs as crumb}
+            {#each crumbs as crumb,cInd(cInd)}
                 <li class="flex items-center gap-1">
                     <ChevronRight width={10} height={10} class="text-content-tertiary shrink-0" />
                     {#if crumb.current}

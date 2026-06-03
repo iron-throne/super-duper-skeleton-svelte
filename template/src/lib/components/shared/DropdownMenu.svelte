@@ -46,7 +46,7 @@
                    bg-surface-primary shadow-lg py-1 {alignClass[align]}"
             role="menu"
         >
-            {#each items as item}
+            {#each items as item, i(i)}
                 {#if item.divider}
                     <div class="my-1 border-t "></div>
                 {/if}

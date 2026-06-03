@@ -47,7 +47,7 @@
 
     <!-- ── Nav items ── -->
     <nav class="flex-1 overflow-y-auto py-3 px-2 flex flex-col gap-0.5">
-        {#each items as item}
+        {#each items as item, iInd (iInd)}
 
             {#if item.children?.length}
                 <!-- ── Group with sub-items ── -->
@@ -80,7 +80,7 @@
 
                     {#if !collapsed && openGroup === item.label}
                         <div class="ml-4 mt-0.5 flex flex-col gap-0.5 border-l  pl-3">
-                            {#each item.children as child}
+                            {#each item.children as child, cInd (cInd)}
                                 <a
                                     href={child.href}
                                     class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors
@@ -116,7 +116,7 @@
                     {#if item.icon}
                         <item.icon width={18} height={18} class="shrink-0" />
                     {:else}
-                        <span class="w-[18px] h-[18px] shrink-0"></span>
+                        <span class="size-4.5 shrink-0"></span>
                     {/if}
 
                     {#if !collapsed}

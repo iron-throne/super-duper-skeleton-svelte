@@ -24,7 +24,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "resolveJsonModule": true,
-    "allowJs": false
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",

@@ -1,5 +1,18 @@
 import type { Component } from "svelte";
 
+export interface IForm {
+    name?: string;
+    icon?: string;
+    formClass?: string;
+    sections: IFormSection[];
+}
+export interface IFormSection {
+    title?: string;
+    icon?: any;
+    id: string;
+    class?:string;
+    fields: IFormField[];
+}
 export interface IFormField {
     key: string; // uniq
     id: string; // for html 'id' attribute
@@ -8,7 +21,7 @@ export interface IFormField {
     placeholder?: string;
     type: EInputType;
     value?: InputValue;
-    icon?: Component;
+    icon?: any;
     helperText?: string;
     required?: boolean;
     rules?: Array<IValidationRule>;
@@ -19,14 +32,15 @@ export interface IFormField {
     options?: Array<ISelectOption>; // for select, radio, etc.
     multiple?: boolean; // file or select
     errorMsg?: string; // validation error message
-    onChange?: (value: any) => void;
+    onChange?: (value: InputValue) => void;
     onBlur?: () => void;
     onFocus?: () => void;
     onInput?: () => void;
+    onKeydown?: (e:KeyboardEvent) => void;
 }
 
 export interface ISelectOption {
-    label: string; value: any, icon?: any
+    label: string; value: any, icon?: any,
 }
 export interface IValidationRule {
     regex: RegExp; message: string
@@ -59,6 +73,16 @@ export enum EInputType {
     MULTISELECT_ADDNEW = "multiselect_add_new",
     SELECT_ADDNEW = "select_add_new",
     RICHTEXT = "richtext",
+}
+
+export enum EDataType {
+    STRING = "string",
+    NUMBER = "number",
+    BOOLEAN = "boolean",
+    DATE = "date",
+    ARRAY = "array",
+    OBJECT = "object",
+    NULL = "null",
 }
 
 export type InputValue = string | number | boolean | File | File[] | null;

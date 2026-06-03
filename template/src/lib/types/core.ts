@@ -1,3 +1,5 @@
+import type { EDataType, EInputType } from "./input";
+
 export interface IToast {
     id: number;
     message: string;
@@ -23,6 +25,12 @@ export enum ETheme {
     DARK = 'dark'
 }
 
+export enum ELocale {
+    EN = 'en',
+    ES = 'es',
+    AR = 'ar',
+}
+
 export interface IGenericObject {
     [key: string]: any;
 }
@@ -33,4 +41,11 @@ export interface Tab {
     badge?: string | number;
     disabled?: boolean;
     icon?: any;
+}
+export interface TableColumn {
+    key: string;
+    label: string;
+    sortable?: boolean;
+    class?: string;
+    type?: EDataType;
 }

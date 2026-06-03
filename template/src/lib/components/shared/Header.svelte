@@ -3,7 +3,7 @@
 	import Globe2 from 'svelte-bootstrap-icons/lib/Globe2.svelte';
 	import { Sun, Moon } from 'svelte-bootstrap-icons';
 	import { getLocale, setLocale, locales } from '$lib/paraglide/runtime';
-	import { enableDarkTheme, enableLightTheme } from '$lib/utils/theme';
+	import { handleThemeToggle } from '$lib/utils';
 	import { getItem, setItem } from '$lib/utils';
 	import { EStorageKey, EThemes } from '$lib/types';
 	import { onMount } from 'svelte';
@@ -16,28 +16,15 @@
 	let { floating = true }: { floating?: boolean } = $props();
 
 	let currentLocale = $state('en');
-	let isDarkMode = $state(false);
 
 	onMount(() => {
 		if (browser) {
 			const savedLocale = getItem(EStorageKey.LANGUAGE);
 			currentLocale = savedLocale ?? getLocale();
 			if (savedLocale) setLocale(savedLocale);
-			isDarkMode =
-				getItem(EStorageKey.THEME) === EThemes.DARK ||
-				(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 		}
 	});
 
-	const handleThemeToggle = () => {
-		isDarkMode = !isDarkMode;
-		if (isDarkMode) {
-			enableDarkTheme();
-		} else {
-			enableLightTheme();
-		}
-		setItem(EStorageKey.THEME, isDarkMode ? EThemes.DARK : EThemes.LIGHT);
-	};
 
 	const handleLanguageChange = (locale: string) => {
 		currentLocale = locale;
@@ -86,7 +73,7 @@
 			class="btn btn-ghost hover:bg-surface-secondary rounded-lg border p-2 transition-colors"
 			aria-label="Toggle theme"
 		>
-			{#if isDarkMode}
+			{#if getItem(EStorageKey.THEME) === EThemes.DARK}
 				<Sun width="18" height="18" />
 			{:else}
 				<Moon width="18" height="18" />

@@ -1,7 +1,0 @@
-template/node_modules
-template/.svelte-kit
-template/.git
-template/build
-template/.output
-template/.vercel
-template/.netlify

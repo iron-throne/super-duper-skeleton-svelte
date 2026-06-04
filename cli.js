@@ -46,6 +46,16 @@ fs.cpSync(templateDir, target, {
 	}
 });
 
+  // npm strips .gitignore from published packages, so the template stores them as _gitignore
+  const renameGitignores = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) renameGitignores(full);
+      else if (entry.name === "_gitignore") fs.renameSync(full, path.join(dir, ".gitignore"));
+    }
+  };
+  renameGitignores(target);
+
   // Rename the package to match the new project folder and drop the private flag
   const pkgPath = path.join(target, "package.json");
   const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));

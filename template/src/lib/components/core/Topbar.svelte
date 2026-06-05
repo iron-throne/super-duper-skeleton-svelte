@@ -38,17 +38,15 @@
 		},
 	];
 
-	let currentLocale: ELocale =  $state(ELocale.EN);
+	let currentLocale: ELocale =  $state(ELocale.EN), activeTheme: EThemes = $state(getItem(EStorageKey.THEME));
 
 	onMount(() => {
 		if (browser) {
 			const savedLocale = getItem(EStorageKey.LANGUAGE) as ELocale | null;
-			currentLocale = savedLocale ?? getLocale();
+			currentLocale = (savedLocale ?? getLocale()) as ELocale;
 			if (savedLocale) setLocale(savedLocale);
 		}
 	});
-
-
 
 	const handleLanguageChange = (locale: ELocale) => {
 		currentLocale = locale;
@@ -62,6 +60,13 @@
 			onclick: () => handleLanguageChange(locale as ELocale),
 		})),
 	);
+
+
+
+	function handleThemeChange() {
+		activeTheme = activeTheme === EThemes.DARK ? EThemes.LIGHT : EThemes.DARK;
+		handleThemeToggle();
+	}
 </script>
 
 <header class="h-14 bg-transparent px-2 shadow-2xs backdrop-blur-sm">
@@ -133,11 +138,11 @@
 
 			<!-- Theme toggle -->
 			<button
-				onclick={handleThemeToggle}
+				onclick={handleThemeChange}
 				aria-label="Toggle theme"
 				class="btn-ghost text-secondary hover:text-primary flex flex-col items-center gap-1 border-0 px-4 py-1 text-[11px] font-semibold"
 			>
-				{#if getItem(EStorageKey.THEME) === EThemes.DARK}
+				{#if activeTheme === EThemes.LIGHT}
 					<Sun class="size-5" />
 					<span class="hidden sm:block">Light</span>
 				{:else}

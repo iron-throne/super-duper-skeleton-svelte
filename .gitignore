@@ -1,4 +1,5 @@
 node_modules
+.claude
 
 # OS
 .DS_Store

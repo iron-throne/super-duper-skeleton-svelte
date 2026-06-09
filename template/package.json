@@ -44,8 +44,7 @@
 		"@inlang/paraglide-sveltekit": "^0.16.1",
 		"@sveltejs/adapter-node": "^5.5.4",
 		"axios": "^1.13.6",
-		"idb": "^8.0.3",
-		"svelte-bootstrap-icons": "^3.3.0",
+"svelte-bootstrap-icons": "^3.3.0",
 		"unplugin-auto-import": "^21.0.0"
 	}
 }

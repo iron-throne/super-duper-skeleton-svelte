@@ -12,11 +12,3 @@ export interface IApiResponse<T> {
     data: T | null;
 }
 
-/** Serialized request stored in the offline sync queue */
-export interface IAPIQueuePayload {
-    url: string;
-    method: string;
-    data?: unknown;
-    headers?: any;
-    isFormData?: boolean; // Indicates if data is FormData, so it can be properly serialized/deserialized
-}

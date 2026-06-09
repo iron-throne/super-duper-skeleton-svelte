@@ -21,31 +21,8 @@ export const axiosConfig = axios.create({
 let _token: string | null = null;
 
 /** Call this from the auth store after login/logout to keep the token in sync. */
-export async function setAuthToken(token: string | null) {
+export function setAuthToken(token: string | null) {
   _token = token;
-  const controller = await waitForServiceWorkerController();
-  controller.postMessage({
-    type: "SET_AUTH_TOKEN",
-    token
-  });
-}
-
-async function waitForServiceWorkerController(): Promise<ServiceWorker> {
-  // If already controlling, return immediately
-  if (navigator.serviceWorker.controller) {
-    return navigator.serviceWorker.controller;
-  }
-
-  // Otherwise wait for controllerchange
-  return new Promise((resolve) => {
-    const listener = () => {
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.removeEventListener("controllerchange", listener);
-        resolve(navigator.serviceWorker.controller);
-      }
-    };
-    navigator.serviceWorker.addEventListener("controllerchange", listener);
-  });
 }
 
 // Attach Bearer token on every request.

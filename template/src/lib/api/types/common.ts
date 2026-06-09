@@ -11,11 +11,6 @@ export enum HttpStatus {
 /** Request timeout in milliseconds (30 s). Applies to all axios requests. */
 export const API_TIMEOUT = 30_000; // ms
 
-/** Query param that signals the service worker to cache the response. */
-export const URL_PARAM_CACHE="sw-cache";
-export const SW_CACHE_PARAM = URL_PARAM_CACHE + '=true';
-export const SW_CACHE_PARAM_FALSE = URL_PARAM_CACHE + '=false';
-
 export enum HttpMethod {
     GET    = 'GET',
     POST   = 'POST',

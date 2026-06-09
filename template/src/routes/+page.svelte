@@ -8,7 +8,6 @@
         Sun,
         Globe2,
         Grid3x3Gap,
-        Layers,
         CodeSlash,
     } from 'svelte-bootstrap-icons';
     import { resolve } from '$app/paths';
@@ -41,13 +40,6 @@
             tag: '20+ Items',
             href: null,
             icon: Grid3x3Gap,
-        },
-        {
-            title: 'PWA Support',
-            desc: 'Service worker included for offline capability and app-like install experience.',
-            tag: 'Service Worker',
-            href: null,
-            icon: Layers,
         },
         {
             title: 'TypeScript',

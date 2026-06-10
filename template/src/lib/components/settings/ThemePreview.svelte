@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { IGenericObject } from '$lib/types';
+	import type { IGenericObject } from "@aryagg/types";
 
 	let { colors }: { colors: IGenericObject | undefined } = $props();
 

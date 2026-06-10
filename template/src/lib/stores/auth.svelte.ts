@@ -2,8 +2,8 @@
 // Centralized authentication store using Svelte 5 Runes.
 // Holds user info, roles, loading state, and permissions.
 
-import { EUserRole } from '$lib/types';
-import type { IAuthUser } from '$lib/types';
+import { EUserRole, type IAuthUser } from "@aryagg/types";
+
 
 let _authState = $state<IAuthUser | null>(null);
 

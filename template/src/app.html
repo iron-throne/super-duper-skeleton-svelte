@@ -24,11 +24,11 @@
 
 	%sveltekit.head%
 
-	<link id="theme-style" rel="stylesheet" href="%sveltekit.env.PUBLIC_BASE_PATH%/theme-light.css" />
+	<link id="theme-style" rel="stylesheet" href="styles/theme-light.css" />
 
 	<script>
 		if (localStorage.getItem('theme') === 'dark') {
-			document.getElementById('theme-style').href = '%sveltekit.env.PUBLIC_BASE_PATH%/theme-dark.css';
+			document.getElementById('theme-style').href = 'styles/theme-dark.css';
 		}
 	</script>
 </head>

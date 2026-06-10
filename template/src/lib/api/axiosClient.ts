@@ -7,8 +7,8 @@ import axios from "axios";
 import { API_TIMEOUT } from "./types/common";
 import { env } from "$env/dynamic/public";
 import { snackStore } from "$lib/stores/snackbar.svelte";
-import { getItem, removeItem } from "$lib/utils/storage";
 import { EStorageKey } from "$lib/types";
+import { getItem, removeItem } from "@aryagg/utils";
 
 /** Single shared axios instance — import this instead of creating new instances. */
 export const axiosConfig = axios.create({

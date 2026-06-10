@@ -19,10 +19,9 @@
 	import DropdownMenu from '$components/shared/DropdownMenu.svelte';
 	import Avatar from '$components/shared/Avatar.svelte';
 	import { getLocale, setLocale, locales } from '$lib/paraglide/runtime';
-	import { handleThemeToggle } from '$lib/utils/theme';
-	import { getItem, setItem } from '$lib/utils';
-	import { ELocale, EStorageKey, EThemes } from '$lib/types';
-
+	import { ELocale, EStorageKey, ETheme } from '@aryagg/types';
+	import { getItem, setItem, setTheme } from '@aryagg/utils';
+	
 	const profileItems = [
 		{
 			label: 'Profile',
@@ -38,7 +37,7 @@
 		},
 	];
 
-	let currentLocale: ELocale =  $state(ELocale.EN), activeTheme: EThemes = $state(getItem(EStorageKey.THEME));
+	let currentLocale: ELocale =  $state(ELocale.EN), activeTheme: ETheme = $state(getItem(EStorageKey.THEME) as ETheme || ETheme.LIGHT);
 
 	onMount(() => {
 		if (browser) {
@@ -64,8 +63,8 @@
 
 
 	function handleThemeChange() {
-		activeTheme = activeTheme === EThemes.DARK ? EThemes.LIGHT : EThemes.DARK;
-		handleThemeToggle();
+		activeTheme = activeTheme === ETheme.DARK ? ETheme.LIGHT : ETheme.DARK;
+		setTheme(activeTheme);
 	}
 </script>
 
@@ -142,7 +141,7 @@
 				aria-label="Toggle theme"
 				class="btn-ghost text-secondary hover:text-primary flex flex-col items-center gap-1 border-0 px-4 py-1 text-[11px] font-semibold"
 			>
-				{#if activeTheme === EThemes.LIGHT}
+				{#if activeTheme === ETheme.LIGHT}
 					<Sun class="size-5" />
 					<span class="hidden sm:block">Light</span>
 				{:else}

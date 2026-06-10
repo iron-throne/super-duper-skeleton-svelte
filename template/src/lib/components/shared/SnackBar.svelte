@@ -2,8 +2,8 @@
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { onDestroy } from 'svelte';
-	import { ESnackType } from '$lib/types';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
+	import { ESnackType } from '@aryagg/types';
 
 	const { current: _snackbar, close } = snackStore;
 

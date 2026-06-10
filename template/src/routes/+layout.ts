@@ -1,7 +1,7 @@
 import { PUBLIC_CONFIG_ENV, PUBLIC_BASE_PATH } from "$env/static/public";
 import { configStore } from "$lib/stores/config.svelte.js";
 import { snackStore } from "$lib/stores/snackbar.svelte.js";
-import { ESnackType } from "$lib/types/core.js";
+import { ESnackType } from "@aryagg/types";
 import type { LayoutLoad } from "./$types"
 
 export const load: LayoutLoad = async ({ fetch }) => {

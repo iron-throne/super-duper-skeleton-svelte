@@ -1,4 +1,4 @@
-import { ESnackType, type ISnackData } from '$lib/types';
+import { ESnackType, type ISnackData } from "@aryagg/types";
 
 let _snackbar = $state<ISnackData | null>(null);
 

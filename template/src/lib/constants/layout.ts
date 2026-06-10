@@ -1,4 +1,4 @@
-import type { INavItem } from "$lib/types";
+import type { INavItem } from "@aryagg/types";
 import {
     Grid3x3Gap,
     Grid3x3GapFill,

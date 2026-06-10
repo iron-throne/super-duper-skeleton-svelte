@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { LOGIN_ROUTE, DASHBOARD_ROUTE } from '$lib/constants/pageRoutes.js';
-import { EUserRole } from '$lib/types';
+import { EUserRole } from '@aryagg/types';
 
 export async function load({ locals }) {
     if (!locals.isAuthenticated || !locals.user) {

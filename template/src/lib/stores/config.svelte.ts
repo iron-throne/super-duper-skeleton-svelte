@@ -1,4 +1,4 @@
-import type { IConfig } from "$lib/types/config";
+import type { IConfig } from "@aryagg/types";
 
 let _config = $state<IConfig>({} as IConfig);
 

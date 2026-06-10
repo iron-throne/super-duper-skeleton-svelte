@@ -1,7 +1,3 @@
-import type { IAuthUser } from '$lib/types';
-import type { ParaglideLocals } from "@inlang/paraglide-sveltekit";
-import type { AvailableLanguageTag } from "$lib/paraglide/runtime";
-
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -17,13 +13,6 @@ declare global {
 			isAuthenticated: boolean;
 		}
 
-		/** Data available in all pages via $page.data */
-		interface PageData {
-			// Add any global page data here
-		}
-
-		/** Platform-specific context (e.g., Cloudflare Workers env) */
-		interface Platform { }
 	}
 }
 

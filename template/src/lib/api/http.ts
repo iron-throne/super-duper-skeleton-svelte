@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
-import type { IApiResult, IApiResponse } from "$lib/types";
 import { snackStore } from "$lib/stores/snackbar.svelte";
+import type { IApiResponse, IApiResult } from "@aryagg/types";
 
 const { error: showError } = snackStore;
 // ─── Core response handler ────────────────────────────────────────────────────

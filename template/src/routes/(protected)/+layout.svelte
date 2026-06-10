@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { updated } from '$app/state';
 	import { beforeNavigate } from '$app/navigation';
-	import '$lib/styles/index.css';
-	import SnackBar from '$lib/components/shared/SnackBar.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
-	import Loader from '$lib/components/shared/Loader.svelte';
 	import { loaderStore } from '$lib/stores/loader.svelte';
+	import {SnackBar, Loader} from '@aryagg/ui-kit';
 
 	let { children } = $props();
 

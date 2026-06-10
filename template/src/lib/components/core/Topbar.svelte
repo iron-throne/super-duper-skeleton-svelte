@@ -16,11 +16,10 @@
 	} from 'svelte-bootstrap-icons';
 	import Globe2 from 'svelte-bootstrap-icons/lib/Globe2.svelte';
 	import { page } from '$app/state';
-	import DropdownMenu from '$components/shared/DropdownMenu.svelte';
-	import Avatar from '$components/shared/Avatar.svelte';
 	import { getLocale, setLocale, locales } from '$lib/paraglide/runtime';
 	import { ELocale, EStorageKey, ETheme } from '@aryagg/types';
 	import { getItem, setItem, setTheme } from '@aryagg/utils';
+	import { Avatar, DropdownMenu } from '@aryagg/ui-kit';
 	
 	const profileItems = [
 		{

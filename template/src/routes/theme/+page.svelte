@@ -15,11 +15,12 @@
 	import ThemePreview from '$lib/components/settings/ThemePreview.svelte';
 	import TypographySettings from '$lib/components/settings/TypographySettings.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
-	import Tabs from '$lib/components/shared/Tabs.svelte';
 	import Topbar from '$components/core/Topbar.svelte';
 	import { THEME_FILES } from '$constants';
 	import { ETheme, type IGenericObject, THEMES_TABS } from '@aryagg/types';
-	import type { deepClone } from '@aryagg/utils';
+	import { deepClone } from '@aryagg/utils';
+	import {Tabs} from '@aryagg/ui-kit';
+
 
 	type ThemeEntry = { name: string; value: ETheme; href: string; colors: IGenericObject };
 	type Tab = 'css' | 'preview';

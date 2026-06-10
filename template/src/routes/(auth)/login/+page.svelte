@@ -2,6 +2,7 @@
     import * as m from '$lib/paraglide/messages';
     import { enhance } from '$app/forms';
     import { Eye, EyeSlash } from 'svelte-bootstrap-icons';
+    import { resolve } from '$app/paths';
 
     let { form }: { form?: { error?: string } | null } = $props();
 
@@ -24,7 +25,7 @@
     <div class="w-full max-w-md">
 
         <!-- Logo -->
-        <a href="/" class="flex items-center justify-center gap-2 mb-8">
+        <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
             <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
         </a>
@@ -79,7 +80,7 @@
                         <label for="password" class="text-sm font-medium text-content-primary">
                             {m.register_password_label()}
                         </label>
-                        <a href="/forgot-password" class="text-xs text-accent hover:underline">
+                        <a href={resolve("/forgot-password",{})} class="text-xs text-accent hover:underline">
                             {m.login_forgot_password()}
                         </a>
                     </div>
@@ -147,7 +148,7 @@
             <!-- Sign up link -->
             <p class="text-center text-sm text-content-secondary">
                 {m.login_no_account()}
-                <a href="/register" class="text-accent font-medium hover:underline ml-1">{m.login_sign_up()}</a>
+                <a href={resolve("/register",{})} class="text-accent font-medium hover:underline ml-1">{m.login_sign_up()}</a>
             </p>
 
         </div>

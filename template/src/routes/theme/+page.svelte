@@ -11,15 +11,15 @@
 	import { onMount } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { fade } from 'svelte/transition';
-	import { THEME_FILES, THEMES_TABS } from '$lib/constants';
-	import { ETheme, type IGenericObject } from '$lib/types';
 	import axios from 'axios';
-	import { deepClone } from '$lib/utils';
 	import ThemePreview from '$lib/components/settings/ThemePreview.svelte';
 	import TypographySettings from '$lib/components/settings/TypographySettings.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
 	import Tabs from '$lib/components/shared/Tabs.svelte';
 	import Topbar from '$components/core/Topbar.svelte';
+	import { THEME_FILES } from '$constants';
+	import { ETheme, type IGenericObject, THEMES_TABS } from '@aryagg/types';
+	import type { deepClone } from '@aryagg/utils';
 
 	type ThemeEntry = { name: string; value: ETheme; href: string; colors: IGenericObject };
 	type Tab = 'css' | 'preview';

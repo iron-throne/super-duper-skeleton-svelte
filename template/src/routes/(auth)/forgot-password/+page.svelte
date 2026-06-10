@@ -1,5 +1,6 @@
 <script lang="ts">
-    import * as m from '$lib/paraglide/messages';
+    import { resolve } from '$app/paths';
+import * as m from '$lib/paraglide/messages';
     import { EnvelopeFill } from 'svelte-bootstrap-icons';
 
     let email = $state('');
@@ -26,7 +27,7 @@
     <div class="w-full max-w-md">
 
         <!-- Logo -->
-        <a href="/" class="flex items-center justify-center gap-2 mb-8">
+        <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
             <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
         </a>
@@ -41,7 +42,7 @@
                     </div>
                     <h2 class="text-xl font-bold text-content-primary">{m.forgot_sent()}</h2>
                     <p class="text-sm text-content-secondary">{m.forgot_sent_hint()}</p>
-                    <a href="/login" class="btn btn-primary mt-4 w-full py-2.5">{m.forgot_back()}</a>
+                    <a href={resolve("/login",{})} class="btn btn-primary mt-4 w-full py-2.5">{m.forgot_back()}</a>
                 </div>
 
             {:else}
@@ -73,7 +74,7 @@
                 </form>
 
                 <p class="mt-6 text-center text-sm">
-                    <a href="/login" class="text-accent hover:underline">{m.forgot_back()}</a>
+                    <a href={resolve("/login",{})} class="text-accent hover:underline">{m.forgot_back()}</a>
                 </p>
             {/if}
 

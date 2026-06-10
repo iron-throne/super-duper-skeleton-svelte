@@ -1,13 +1,20 @@
 {
-  "name": "@aryagg/create-super-svelte-skeleton",
-  "version": "1.0.16",
+  "name": "@aryagg/create-svelte-lib-template",
+  "version": "1.0.0",
   "type": "module",
   "private": false,
   "bin": {
-    "create-super-svelte-skeleton": "cli.js"
+    "create-svelte-lib-template": "cli.js"
   },
   "files": [
     "cli.js",
     "template"
-  ]
+  ],
+  "devDependencies": {
+    "@aryagg/theme": "^0.0.1",
+    "@aryagg/types": "^1.0.1"
+  },
+  "dependencies": {
+    "@aryagg/utils": "^1.0.1"
+  }
 }

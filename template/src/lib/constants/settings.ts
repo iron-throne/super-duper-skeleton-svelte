@@ -1,9 +1,9 @@
-import { EInputType, ETheme, type IFormField } from "$lib/types";
 import { PUBLIC_BASE_PATH } from "$env/static/public";
+import { ETheme, EInputType, type IFormField } from '@aryagg/types';
 
 export const THEME_FILES = [
-    { name: "Light", href: `${PUBLIC_BASE_PATH}/theme-light.css`, value: ETheme.LIGHT },
-    { name: "Dark", href: `${PUBLIC_BASE_PATH}/theme-dark.css`, value: ETheme.DARK },
+	{ name: "Light", href: `${PUBLIC_BASE_PATH}/theme-light.css`, value: ETheme.LIGHT },
+	{ name: "Dark", href: `${PUBLIC_BASE_PATH}/theme-dark.css`, value: ETheme.DARK },
 ];
 
 export const THEME_INPUTS: IFormField[] = [

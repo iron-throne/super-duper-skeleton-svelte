@@ -1,6 +1,7 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages';
     import { Eye, EyeSlash } from 'svelte-bootstrap-icons';
+    import { resolve } from '$app/paths';
 
     let name = $state('');
     let email = $state('');
@@ -30,7 +31,7 @@
     <div class="w-full max-w-md">
 
         <!-- Logo -->
-        <a href="/" class="flex items-center justify-center gap-2 mb-8">
+        <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
             <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
         </a>
@@ -158,7 +159,7 @@
             <!-- Sign in link -->
             <p class="text-center text-sm text-content-secondary">
                 {m.register_have_account()}
-                <a href="/login" class="text-accent font-medium hover:underline ml-1">{m.register_sign_in()}</a>
+                <a href={resolve("/login",{})} class="text-accent font-medium hover:underline ml-1">{m.register_sign_in()}</a>
             </p>
 
         </div>

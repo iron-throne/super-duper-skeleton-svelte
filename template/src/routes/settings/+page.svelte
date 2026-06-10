@@ -2,9 +2,9 @@
 	import { ArrowClockwise } from 'svelte-bootstrap-icons';
 	import Form from '$lib/components/shared/Form.svelte';
 	import { snackStore } from '$lib/stores/snackbar.svelte';
-	import { THEME_INPUTS } from '$lib/constants/settings';
-	import type { IFormField } from '$lib/types';
 	import Topbar from '$components/core/Topbar.svelte';
+	import { THEME_INPUTS } from '$constants';
+	import type { IFormField } from '@aryagg/types';
 
 
 	let fields = $state<IFormField[]>(structuredClone(THEME_INPUTS));

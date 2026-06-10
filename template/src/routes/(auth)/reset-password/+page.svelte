@@ -2,6 +2,7 @@
     import * as m from '$lib/paraglide/messages';
     import { page } from '$app/state';
     import { Eye, EyeSlash, ExclamationCircleFill } from 'svelte-bootstrap-icons';
+    import { resolve } from '$app/paths';
 
     // Token comes from ?token=... query param (emailed link)
     const token = $derived(page.url.searchParams.get('token') ?? '');
@@ -39,7 +40,7 @@
 
     <div class="w-full max-w-md">
 
-        <a href="/" class="flex items-center justify-center gap-2 mb-8">
+        <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
             <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
         </a>

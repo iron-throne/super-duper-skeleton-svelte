@@ -8,14 +8,14 @@
 
 	let { children, data } = $props();
 
-	// Set synchronously so children have config available on first render (SSR + CSR)
-	if (data.config) {
-		configStore.set(data.config);
-	}
-
+	
 	$effect(() => {
+		// Set synchronously so children have config available on first render (SSR + CSR)
 		if (data.configError) {
 			snackStore.show({ type: ESnackType.DANGER, message: data.configError });
+		}
+		if (data.config) {
+			configStore.set(data.config);
 		}
 	});
 

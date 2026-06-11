@@ -21,8 +21,8 @@
 	import ColorCard          from './ColorCard.svelte';
 	import CSSOutput          from './CSSOutput.svelte';
 	import { THEME_FILES }          from '../constants';
-	import { extractCSSVariables }  from '../model/theme.utils';
 	import type { ThemeEntry, Tab } from '../types';
+	import { extractCSSVariables } from '../utils';
 
 	const DEFAULT_FONT = "'Inter', sans-serif";
 

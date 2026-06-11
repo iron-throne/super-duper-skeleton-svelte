@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state';
-	import { HttpStatus } from '$lib/api/types';
+	import { HttpStatus } from '$shared/api';
     import { resolve } from '$app/paths';
     import { LightbulbOff } from 'svelte-bootstrap-icons';
 

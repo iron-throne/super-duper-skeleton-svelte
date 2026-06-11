@@ -3,7 +3,12 @@
     "allow": [
       "Bash(node cli.js test-app)",
       "Bash(ls \"C:\\\\Users\\\\tmp200\\\\AppData\\\\Local\\\\npm-cache\\\\_npx\\\\4e8d8f003984bfd2\\\\node_modules\\\\@aryagg\\\\create-super-svelte-skeleton\\\\template\")",
-      "Read(//c/Users/tmp200/AppData/Local/npm-cache/_npx/4e8d8f003984bfd2/node_modules/@aryagg/create-super-svelte-skeleton/template/**)"
+      "Read(//c/Users/tmp200/AppData/Local/npm-cache/_npx/4e8d8f003984bfd2/node_modules/@aryagg/create-super-svelte-skeleton/template/**)",
+      "Bash(grep -rn '$components\\\\|$constants\\\\|$stores\\\\|$lib/api\\\\|$lib/stores\\\\|$lib/constants' 'f:/repo/Skeleton/super-duper-skeleton-svelte/template/src/routes/\\(auth\\)')",
+      "Bash(git stash *)",
+      "Bash(xargs grep -l \"setTheme\\\\|getItem\")",
+      "Bash(xargs grep -l \"IForm\\\\b\")",
+      "Bash(xargs grep -l \"env/dynamic\\\\|env/static\")"
     ]
   }
 }

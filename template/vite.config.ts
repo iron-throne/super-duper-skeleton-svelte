@@ -39,7 +39,8 @@ export default defineConfig({
     }),
 
     // SvelteKit plugin (must come after other Vite plugins)
-    sveltekit(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    sveltekit() as unknown as import('vite').PluginOption,
 
     // Paraglide i18n plugin (for translations)
     paraglideVitePlugin({

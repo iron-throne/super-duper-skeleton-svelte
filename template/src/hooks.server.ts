@@ -3,7 +3,7 @@ import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { getTextDirection } from '$lib/paraglide/runtime';
 import { sequence } from '@sveltejs/kit/hooks';
-import { AUTH_COOKIE_NAME } from '$lib/constants';
+import { AUTH_COOKIE_NAME } from '$shared/config';
 import { env } from '$env/dynamic/private';
 
 /* Paraglide: inject locale + direction into HTML */

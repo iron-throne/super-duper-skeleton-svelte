@@ -1,7 +1,6 @@
 import type { Actions } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
-import { AUTH_COOKIE_NAME } from '$lib/constants';
-import { LOGIN_ROUTE } from '$lib/constants/pageRoutes';
+import { AUTH_COOKIE_NAME, LOGIN_ROUTE } from '$shared/config';
 
 export const actions: Actions = {
     default: async ({ cookies }) => {

@@ -18,7 +18,7 @@ const config = {
 
 	// Click element in browser → jump to source file
 	vitePlugin: {
-		inspector: { showContext: true }
+		inspector: true
 	},
 
 	kit: {
@@ -34,19 +34,20 @@ const config = {
 		// Allows deploying your app under a subfolder.
 		// Example: https://example.com/myapp → base = '/myapp'
 		paths: {
-			base: env.PUBLIC_BASE_PATH || ''
+			base: /** @type {'' | `/${string}`} */ (env.PUBLIC_BASE_PATH || '')
 		},
 		// Lets you write: import Button from '$components/Button.svelte'
 		// instead of: import Button from '../../../lib/components/Button.svelte'
 		alias: {
-			$components: 'src/lib/components',
-			$composables: 'src/lib/composables',
-			$constants: 'src/lib/constants',
-			$paraglide: 'src/lib/paraglide',
-			$stores: 'src/lib/stores',
-			$styles: 'src/lib/styles',
-			$utils: 'src/lib/utils',
-			$server: 'src/lib/server'
+			// ── FSD Layers ──────────────────────────────────────────────
+			$shared:   'src/lib/shared',     // HTTP client, i18n, global constants
+			$entities: 'src/lib/entities',   // Business domains: auth, user, config
+			$features: 'src/lib/features',   // User-interaction slices: theme-editor, etc.
+			$widgets:  'src/lib/widgets',    // Composite UI blocks: Topbar, Sidebar, etc.
+			// ── Kept as-is ──────────────────────────────────────────────
+			$paraglide: 'src/lib/paraglide', // Auto-generated i18n (do not edit manually)
+			$styles:    'src/lib/styles',
+			$server:    'src/lib/server',
 		},
 
 		// CSP (Content Security Policy) helps prevent XSS attacks.

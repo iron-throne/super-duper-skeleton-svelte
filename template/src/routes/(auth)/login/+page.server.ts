@@ -1,9 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
-import { AUTH_COOKIE_NAME } from '$lib/constants';
-import { DASHBOARD_ROUTE } from '$lib/constants/pageRoutes';
+import { AUTH_COOKIE_NAME, DASHBOARD_ROUTE } from '$shared/config';
 import { PUBLIC_API_URL } from '$env/static/public';
-import type { AuthToken, IAuthUser } from '$lib/api/types';
+import type { AuthToken, IAuthUser } from '$entities/auth';
 
 export const actions: Actions = {
     default: async ({ request, cookies, fetch }) => {

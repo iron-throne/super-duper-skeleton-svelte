@@ -138,7 +138,7 @@
             <!-- Divider -->
             <div class="relative my-6">
                 <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t "></div>
+                    <div class="w-full border-t border-border-primary"></div>
                 </div>
                 <div class="relative flex justify-center text-xs">
                     <span class="px-3 bg-surface-primary text-content-tertiary">{m.divider_text()}</span>

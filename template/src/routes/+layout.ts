@@ -1,6 +1,6 @@
 import { PUBLIC_CONFIG_ENV, PUBLIC_BASE_PATH } from "$env/static/public";
 import { configStore } from "$lib/stores/config.svelte.js";
-import { snackStore } from "$lib/stores/snackbar.svelte.js";
+import { snackStore } from "@aryagg/ui-kit";
 import { ESnackType } from "@aryagg/types";
 import type { LayoutLoad } from "./$types"
 

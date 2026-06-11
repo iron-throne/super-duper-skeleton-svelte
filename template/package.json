@@ -14,8 +14,8 @@
 		"machine-translate": "inlang machine translate --project project.inlang"
 	},
 	"devDependencies": {
-		"@aryagg/theme": "^0.0.1",
-		"@aryagg/types": "^1.0.1",
+		"@aryagg/theme": "file:../../skeleton-packages/packages/theme",
+		"@aryagg/types": "file:../../skeleton-packages/packages/types",
 		"@eslint/compat": "^2.0.2",
 		"@eslint/js": "^10.0.1",
 		"@fontsource/fira-mono": "^5.2.7",
@@ -43,7 +43,7 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
-		"@aryagg/ui-kit": "^0.0.1",
+		"@aryagg/ui-kit": "file:../../skeleton-packages/packages/ui-kit",
 		"@aryagg/utils": "file:../../skeleton-packages/packages/utils",
 		"@inlang/paraglide-sveltekit": "^0.16.1",
 		"@sveltejs/adapter-node": "^5.5.4",

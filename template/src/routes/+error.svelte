@@ -1,6 +1,7 @@
 <script lang="ts">
     import { page } from '$app/state';
 	import { HttpStatus } from '$lib/api/types';
+    import { resolve } from '$app/paths';
     import { LightbulbOff } from 'svelte-bootstrap-icons';
 
     const status = $derived(page.status);
@@ -31,14 +32,14 @@
     <title>Error {status}</title>
 </svelte:head>
 
-<main class="flex min-h-screen flex-col bg-white">
+<main class="flex min-h-screen flex-col bg-primary">
     <!-- Main content -->
     <div class="flex flex-1 items-center justify-center px-8 pb-16">
         <div class="flex flex-col items-center gap-16 md:flex-row md:gap-24">
 
             <!-- Left: Icon in circle -->
             <div class="shrink-0">
-                <div class="flex h-72 w-72 items-center justify-center rounded-full bg-red-50">
+                <div class="flex h-72 w-72 items-center justify-center rounded-full bg-error">
                     <div class="text-error opacity-90 animate-bounce duration-300" >
                         <LightbulbOff width={140} height={140} />
                     </div>
@@ -60,14 +61,14 @@
                 </h1>
 
                 <!-- Hint -->
-                <p class="font-light italic text-gray-400" >
+                <p class="font-light italic" >
                     {hint}
                 </p>
 
                 <!-- CTA -->
                 <div class="mt-10 flex items-center gap-8">
                     <a
-                        href="/"
+                        href={resolve("/", {})}
                         class="btn btn-primary"
                     >
                         GO TO HOME

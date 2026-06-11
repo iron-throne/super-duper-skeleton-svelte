@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ArrowClockwise } from 'svelte-bootstrap-icons';
-	import { snackStore } from '$lib/stores/snackbar.svelte';
+import { snackStore } from "@aryagg/ui-kit";
 	import Topbar from '$components/core/Topbar.svelte';
 	import { THEME_INPUTS } from '$constants';
 	import type { IFormField } from '@aryagg/types';

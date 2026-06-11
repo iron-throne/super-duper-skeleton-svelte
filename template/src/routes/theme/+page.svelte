@@ -14,7 +14,7 @@
 	import axios from 'axios';
 	import ThemePreview from '$lib/components/settings/ThemePreview.svelte';
 	import TypographySettings from '$lib/components/settings/TypographySettings.svelte';
-	import { snackStore } from '$lib/stores/snackbar.svelte';
+import { snackStore } from "@aryagg/ui-kit";
 	import Topbar from '$components/core/Topbar.svelte';
 	import { THEME_FILES } from '$constants';
 	import { ETheme, type IGenericObject, THEMES_TABS } from '@aryagg/types';

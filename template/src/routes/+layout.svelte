@@ -2,8 +2,7 @@
 	import '../app.css';
 	import { updated } from '$app/state';
 	import { beforeNavigate } from '$app/navigation';
-	import { snackStore } from '$lib/stores/snackbar.svelte';
-	import { loaderStore } from '$lib/stores/loader.svelte';
+import { snackStore, loaderStore } from "@aryagg/ui-kit";
 	import {SnackBar, Loader} from '@aryagg/ui-kit';
 
 	let { children } = $props();

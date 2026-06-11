@@ -1,36 +1,24 @@
 import { PUBLIC_CONFIG_ENV, PUBLIC_BASE_PATH } from "$env/static/public";
-import { configStore } from '$entities/config';
-import { snackStore } from "@aryagg/ui-kit";
-import { ESnackType } from "@aryagg/types";
-import type { LayoutLoad } from "./$types"
+import type { LayoutLoad } from "./$types";
 
 export const load: LayoutLoad = async ({ fetch }) => {
-    const configEnv = PUBLIC_CONFIG_ENV; // runtime value
-
-    if (!configEnv) {
-        console.log("PUBLIC_CONFIG_ENV not available");
-        snackStore.show({
-            type: ESnackType.DANGER,
-            message: "Configuration environment missing"
-        });
-        return;
+    if (!PUBLIC_CONFIG_ENV) {
+        console.error("PUBLIC_CONFIG_ENV is not set");
+        return { config: null, configError: "Configuration environment missing" };
     }
 
     try {
-        const res = await fetch(`${PUBLIC_BASE_PATH}/config/config.${configEnv}.json`);
+        const res = await fetch(`${PUBLIC_BASE_PATH}/config/config.${PUBLIC_CONFIG_ENV}.json`);
 
         if (!res.ok) {
-            throw new Error(`Failed to load config.${configEnv}.json`);
+            throw new Error(`Failed to load config.${PUBLIC_CONFIG_ENV}.json`);
         }
 
-        const json = await res.json();
-        configStore.set(json);
+        const config = await res.json();
+        return { config, configError: null };
 
     } catch (err) {
         console.error(err);
-        snackStore.show({
-            type: ESnackType.DANGER,
-            message: "Failed to load configuration"
-        });
+        return { config: null, configError: "Failed to load configuration" };
     }
-}
+};

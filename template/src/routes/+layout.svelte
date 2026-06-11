@@ -2,10 +2,22 @@
 	import '../app.css';
 	import { updated } from '$app/state';
 	import { beforeNavigate } from '$app/navigation';
-	import { snackStore, loaderStore } from '@aryagg/ui-kit';
+	import { snackStore, loaderStore, configStore } from '@aryagg/ui-kit';
 	import { SnackBar, Loader } from '@aryagg/ui-kit';
+	import { ESnackType } from '@aryagg/types';
 
-	let { children } = $props();
+	let { children, data } = $props();
+
+	// Set synchronously so children have config available on first render (SSR + CSR)
+	if (data.config) {
+		configStore.set(data.config);
+	}
+
+	$effect(() => {
+		if (data.configError) {
+			snackStore.show({ type: ESnackType.DANGER, message: data.configError });
+		}
+	});
 
 	// When a new build is deployed, force a full-page reload on the next navigation
 	// so the user always runs the latest code without a manual refresh.

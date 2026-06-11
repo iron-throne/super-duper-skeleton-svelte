@@ -5,4 +5,4 @@
 @source "../node_modules/@aryagg/ui-kit/dist";
 
 /* 3. Project config — adds your custom colors/plugins on top of the theme */
-@config "./lib/styles/tailwind.config.ts";
+@config "./lib/tailwind.config.ts";

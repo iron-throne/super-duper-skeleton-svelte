@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '@aryagg/theme';
+	import '../app.css';
 	import { updated } from '$app/state';
 	import { beforeNavigate } from '$app/navigation';
 	import { snackStore } from '$lib/stores/snackbar.svelte';

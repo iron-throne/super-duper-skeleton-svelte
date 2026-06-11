@@ -4,7 +4,7 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import * as m from '$paraglide/messages';
-	import { MENU_ITEMS } from './nav.config';
+	import { MENU_ITEMS } from './constants';
 	import { LOGOUT_ROUTE, PROFILE_ROUTE } from '$shared/config';
 	import {
 		Search,

@@ -1,16 +1,17 @@
 // Auth service — domain layer that owns the HTTP + UI side-effect decision.
 // snackStore lives here (not in the infra layer below it).
 
-import { httpClient, handleApiResponse } from '$shared/api';
 import { snackStore } from '@aryagg/ui-kit';
 import { AUTH } from './endpoints';
 import type { LoginPayload, RegisterPayload, ResetPayload, AuthToken, IAuthUser } from '../types';
+import { handleApiResponse } from '@aryagg/utils';
+import { httpClient } from '$shared';
 
 async function callWithToast<T>(
 	promise: ReturnType<typeof handleApiResponse<T>>,
 ): Promise<Awaited<ReturnType<typeof handleApiResponse<T>>>> {
 	const result = await promise;
-	if (!result.ok) snackStore.showError(result.error!);
+	if (!result.isSuccess) snackStore.showError(result.message!);
 	return result;
 }
 

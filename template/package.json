@@ -1,6 +1,6 @@
 {
 	"name": "super-svelte-skeleton",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@aryagg/theme": "^0.0.1",
-		"@aryagg/types": "^1.0.1",
+		"@aryagg/types": "^1.1.0",
 		"@eslint/compat": "^2.0.2",
 		"@eslint/js": "^10.0.1",
 		"@fontsource/fira-mono": "^5.2.7",
@@ -43,8 +43,8 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
-		"@aryagg/ui-kit": "^0.0.1",
-		"@aryagg/utils": "^1.0.7",
+		"@aryagg/ui-kit": "^0.2.0",
+		"@aryagg/utils": "^1.1.0",
 		"@inlang/paraglide-sveltekit": "^0.16.1",
 		"@sveltejs/adapter-node": "^5.5.4",
 		"axios": "^1.13.6",

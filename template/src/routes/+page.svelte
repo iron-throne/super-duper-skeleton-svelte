@@ -1,5 +1,5 @@
-<script lang="ts">
-    import * as m from '$lib/paraglide/messages';
+﻿<script lang="ts">
+    import { t } from '$shared/i18n'
     import { Topbar } from '$widgets/topbar';
     import {
         ArrowRight,
@@ -29,7 +29,7 @@
         },
         {
             title: 'Internationalization',
-            desc: '8 languages out of the box with Paraglide. RTL-aware layout support included.',
+            desc: '8 languages out of the box. RTL-aware layout with cookie-persisted locale switching.',
             tag: '8 Languages',
             href: null,
             icon: Globe2,
@@ -52,8 +52,8 @@
 </script>
 
 <svelte:head>
-    <title>{m.home_title()}</title>
-    <meta name="description" content={m.home_description()} />
+    <title>{$t('home_title')}</title>
+    <meta name="description" content={$t('home_description')} />
 </svelte:head>
 
 <div class="min-h-screen flex flex-col bg-surface-primary text-primary overflow-x-hidden">
@@ -77,17 +77,17 @@
         <!-- Eyebrow badge -->
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold tracking-[0.15em] uppercase mb-7">
             <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-            {m.hero_eyebrow()}
+            {$t('hero_eyebrow')}
         </div>
 
         <!-- Heading -->
         <h1 class="text-5xl md:text-7xl font-bold leading-[1.06] tracking-tight text-primary mb-5 max-w-2xl">
-            {m.home_welcome()}
+            {$t('home_welcome')}
         </h1>
 
         <!-- Subtitle -->
         <p class="text-secondary text-lg md:text-xl leading-relaxed max-w-md mb-10">
-            {m.home_subtitle()}
+            {$t('home_subtitle')}
         </p>
 
         <!-- CTAs -->
@@ -96,32 +96,32 @@
                 href={resolve('/register', {})}
                 class="no-underline inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-accent text-on-accent font-semibold text-base transition-all duration-200 shadow-lg hover:opacity-90 hover:-translate-y-0.5"
             >
-                {m.home_register_btn()}
+                {$t('home_register_btn')}
                 <ArrowRight width={15} height={15} />
             </a>
             <a
                 href={resolve('/login', {})}
                 class="no-underline inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-accent/40 text-accent hover:bg-accent/10 font-semibold text-base transition-all duration-200 hover:-translate-y-0.5"
             >
-                {m.home_login_btn()}
+                {$t('home_login_btn')}
             </a>
         </div>
 
         <!-- Stats -->
         <div class="flex items-center gap-6 sm:gap-10">
             <div>
-                <p class="text-2xl font-bold text-primary">{m.hero_stat1_value()}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{m.hero_stat1_label()}</p>
+                <p class="text-2xl font-bold text-primary">{$t('hero_stat1_value')}</p>
+                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat1_label')}</p>
             </div>
             <div class="w-px h-8 bg-border-primary"></div>
             <div>
-                <p class="text-2xl font-bold text-primary">{m.hero_stat2_value()}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{m.hero_stat2_label()}</p>
+                <p class="text-2xl font-bold text-primary">{$t('hero_stat2_value')}</p>
+                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat2_label')}</p>
             </div>
             <div class="w-px h-8 bg-border-primary"></div>
             <div>
-                <p class="text-2xl font-bold text-primary">{m.hero_stat3_value()}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{m.hero_stat3_label()}</p>
+                <p class="text-2xl font-bold text-primary">{$t('hero_stat3_value')}</p>
+                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat3_label')}</p>
             </div>
         </div>
     </section>
@@ -167,13 +167,13 @@
     <div class="sticky flex-none bottom-0 z-40 border-t border-border-primary bg-surface-primary/80 backdrop-blur-sm overflow-hidden py-3">
         <div class="flex gap-10 w-max marquee-track items-center">
             {#each [0,1,2,3,4,5,6,7] as i (i)}
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{m.marquee_1()}</span>
+                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_1')}</span>
                 <span class="text-accent text-xs">✦</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{m.marquee_2()}</span>
+                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_2')}</span>
                 <span class="text-accent text-xs">◈</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{m.marquee_3()}</span>
+                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_3')}</span>
                 <span class="text-accent text-xs">✦</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{m.marquee_4()}</span>
+                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_4')}</span>
                 <span class="text-accent text-xs">◈</span>
             {/each}
         </div>

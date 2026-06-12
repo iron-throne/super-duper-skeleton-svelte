@@ -6,30 +6,38 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const T: typeof import('$shared/i18n').T
   const afterUpdate: typeof import('svelte').afterUpdate
   const beforeUpdate: typeof import('svelte').beforeUpdate
   const blur: typeof import('svelte/transition').blur
   const createEventDispatcher: typeof import('svelte').createEventDispatcher
   const crossfade: typeof import('svelte/transition').crossfade
   const derived: typeof import('svelte/store').derived
+  const dir: typeof import('$shared/i18n').dir
   const draw: typeof import('svelte/transition').draw
   const fade: typeof import('svelte/transition').fade
   const fly: typeof import('svelte/transition').fly
   const get: typeof import('svelte/store').get
   const getAllContexts: typeof import('svelte').getAllContexts
   const getContext: typeof import('svelte').getContext
+  const getLocale: typeof import('$shared/i18n').getLocale
   const goto: typeof import('$app/navigation').goto
   const hasContext: typeof import('svelte').hasContext
+  const initLocale: typeof import('$shared/i18n').initLocale
   const invalidate: typeof import('$app/navigation').invalidate
   const invalidateAll: typeof import('$app/navigation').invalidateAll
-  const m: typeof import('$lib/paraglide/messages')
+  const isRTL: typeof import('$shared/i18n').isRTL
+  const locale: typeof import('$shared/i18n').locale
+  const m: typeof import('$shared/i18n')
   const onDestroy: typeof import('svelte').onDestroy
   const onMount: typeof import('svelte').onMount
   const readable: typeof import('svelte/store').readable
   const redirect: typeof import('@sveltejs/kit').redirect
   const scale: typeof import('svelte/transition').scale
   const setContext: typeof import('svelte').setContext
+  const setLocale: typeof import('$shared/i18n').setLocale
   const slide: typeof import('svelte/transition').slide
+  const t: typeof import('$shared/i18n')
   const tick: typeof import('svelte').tick
   const writable: typeof import('svelte/store').writable
 }

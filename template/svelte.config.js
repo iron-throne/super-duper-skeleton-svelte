@@ -45,7 +45,6 @@ const config = {
 			$features: 'src/lib/features',   // User-interaction slices: theme-editor, etc.
 			$widgets:  'src/lib/widgets',    // Composite UI blocks: Topbar, Sidebar, etc.
 			// ── Kept as-is ──────────────────────────────────────────────
-			$paraglide: 'src/lib/paraglide', // Auto-generated i18n (do not edit manually)
 			$styles:    'src/lib/styles',
 			$server:    'src/lib/server',
 		},

@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
-	import * as m from '$paraglide/messages';
+	import { t, locale, setLocale, locales } from '$shared/i18n';
 	import { MENU_ITEMS } from './constants';
 	import { LOGOUT_ROUTE, PROFILE_ROUTE } from '$shared/config';
 	import {
@@ -16,9 +14,8 @@
 	} from 'svelte-bootstrap-icons';
 	import Globe2 from 'svelte-bootstrap-icons/lib/Globe2.svelte';
 	import { page } from '$app/state';
-	import { getLocale, setLocale, locales } from '$paraglide/runtime';
-	import { ELocale, EStorageKey, ETheme } from '@aryagg/types';
-	import { getItem, setItem, setTheme } from '@aryagg/utils';
+	import { EStorageKey, ETheme } from '@aryagg/types';
+	import { getItem, setTheme } from '@aryagg/utils';
 	import { Avatar, DropdownMenu } from '@aryagg/ui-kit';
 
 	const profileItems = [
@@ -26,27 +23,16 @@
 		{ label: 'Logout',  icon: BoxArrowRight, danger: true, divider: true, onclick: () => goto(resolve(LOGOUT_ROUTE, {})) },
 	];
 
-	let currentLocale: ELocale = $state(ELocale.EN);
-	let activeTheme: ETheme    = $state((getItem(EStorageKey.THEME) as ETheme) || ETheme.LIGHT);
+	let activeTheme: ETheme = $state((getItem(EStorageKey.THEME) as ETheme) || ETheme.LIGHT);
 
-	onMount(() => {
-		if (browser) {
-			const savedLocale = getItem(EStorageKey.LANGUAGE) as ELocale | null;
-			currentLocale = (savedLocale ?? getLocale()) as ELocale;
-			if (savedLocale) setLocale(savedLocale);
-		}
-	});
-
-	const handleLanguageChange = (locale: ELocale) => {
-		currentLocale = locale;
-		setLocale(locale);
-		setItem(EStorageKey.LANGUAGE, locale);
+	const handleLanguageChange = (l: string) => {
+		setLocale(l);
 	};
 
 	let languageItems = $derived(
-		locales.map((locale) => ({
-			label:   locale.toUpperCase(),
-			onclick: () => handleLanguageChange(locale as ELocale),
+		locales.map((l) => ({
+			label:   l.toUpperCase(),
+			onclick: () => handleLanguageChange(l),
 		})),
 	);
 
@@ -62,7 +48,7 @@
 			<a href={resolve('/', {})} class="flex aspect-square size-10 items-center justify-center rounded-md transition-colors" aria-label="Home" title="Home">
 				<img alt="Logo" class="size-full object-contain" src={asset('/logo.svg')} />
 			</a>
-			<h5 class="font-bold whitespace-nowrap">{m.app_name()}</h5>
+			<h5 class="font-bold whitespace-nowrap">{$t('app_name')}</h5>
 
 			<div class="relative min-w-45 sm:min-w-60 md:min-w-75">
 				<Search class="text-tertiary/70 absolute top-1/2 left-3 size-4 -translate-y-1/2" />
@@ -93,7 +79,7 @@
 				{#snippet trigger({ open, toggle })}
 					<button onclick={toggle} aria-label="Switch language" aria-expanded={open} class="btn-ghost text-secondary hover:text-primary flex flex-col items-center gap-1 border-0 px-2 text-[11px] font-semibold">
 						<Globe2 class="size-5" />
-						<div class="hidden uppercase sm:block">{currentLocale}</div>
+						<div class="hidden uppercase sm:block">{$locale}</div>
 					</button>
 				{/snippet}
 			</DropdownMenu>

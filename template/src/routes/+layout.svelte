@@ -5,10 +5,12 @@
 	import { snackStore, loaderStore, configStore } from '@aryagg/ui-kit';
 	import { SnackBar, Loader } from '@aryagg/ui-kit';
 	import { ESnackType } from '@aryagg/types';
+	import { initLocale } from '$shared/i18n';
 
 	let { children, data } = $props();
 
-	
+	onMount(() => initLocale());
+
 	$effect(() => {
 		// Set synchronously so children have config available on first render (SSR + CSR)
 		if (data.configError) {

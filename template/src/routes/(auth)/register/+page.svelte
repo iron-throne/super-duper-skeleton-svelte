@@ -1,5 +1,5 @@
-<script lang="ts">
-    import * as m from '$lib/paraglide/messages';
+﻿<script lang="ts">
+    import { t } from '$shared/i18n'
     import { Eye, EyeSlash } from 'svelte-bootstrap-icons';
     import { resolve } from '$app/paths';
 
@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-    <title>{m.register_title()}</title>
+    <title>{$t('register_title')}</title>
 </svelte:head>
 
 <div class="min-h-screen bg-surface-tertiary flex items-center justify-center px-4 py-12">
@@ -33,7 +33,7 @@
         <!-- Logo -->
         <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
-            <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
+            <span class="font-semibold text-content-primary tracking-wide text-lg">{$t('app_name')}</span>
         </a>
 
         <!-- Card -->
@@ -41,8 +41,8 @@
 
             <!-- Heading -->
             <div class="mb-8 text-center">
-                <h1 class="text-2xl font-bold text-content-primary mb-1">{m.register_title()}</h1>
-                <p class="text-sm text-content-secondary">{m.register_subtitle()}</p>
+                <h1 class="text-2xl font-bold text-content-primary mb-1">{$t('register_title')}</h1>
+                <p class="text-sm text-content-secondary">{$t('register_subtitle')}</p>
             </div>
 
             <form onsubmit={handleSubmit} class="flex flex-col gap-5">
@@ -50,13 +50,13 @@
                 <!-- Full Name -->
                 <div class="flex flex-col gap-1.5">
                     <label for="name" class="text-sm font-medium text-content-primary">
-                        {m.register_name_label()}
+                        {$t('register_name_label')}
                     </label>
                     <input
                         id="name"
                         type="text"
                         bind:value={name}
-                        placeholder={m.register_name_placeholder()}
+                        placeholder={$t('register_name_placeholder')}
                         required
                         autocomplete="name"
                         class="w-full px-4 py-2.5 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -66,13 +66,13 @@
                 <!-- Email -->
                 <div class="flex flex-col gap-1.5">
                     <label for="email" class="text-sm font-medium text-content-primary">
-                        {m.register_email_label()}
+                        {$t('register_email_label')}
                     </label>
                     <input
                         id="email"
                         type="email"
                         bind:value={email}
-                        placeholder={m.register_email_placeholder()}
+                        placeholder={$t('register_email_placeholder')}
                         required
                         autocomplete="email"
                         class="w-full px-4 py-2.5 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -82,14 +82,14 @@
                 <!-- Password -->
                 <div class="flex flex-col gap-1.5">
                     <label for="password" class="text-sm font-medium text-content-primary">
-                        {m.register_password_label()}
+                        {$t('register_password_label')}
                     </label>
                     <div class="relative">
                         <input
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             bind:value={password}
-                            placeholder={m.register_password_placeholder()}
+                            placeholder={$t('register_password_placeholder')}
                             required
                             autocomplete="new-password"
                             class="w-full px-4 py-2.5 pr-11 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -112,14 +112,14 @@
                 <!-- Confirm Password -->
                 <div class="flex flex-col gap-1.5">
                     <label for="confirm" class="text-sm font-medium text-content-primary">
-                        {m.register_confirm_label()}
+                        {$t('register_confirm_label')}
                     </label>
                     <div class="relative">
                         <input
                             id="confirm"
                             type={showConfirm ? 'text' : 'password'}
                             bind:value={confirm}
-                            placeholder={m.register_confirm_placeholder()}
+                            placeholder={$t('register_confirm_placeholder')}
                             required
                             autocomplete="new-password"
                             class="w-full px-4 py-2.5 pr-11 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -141,7 +141,7 @@
 
                 <!-- Submit -->
                 <button type="submit" class="btn btn-primary w-full py-3 text-base font-semibold mt-1">
-                    {m.register_submit()}
+                    {$t('register_submit')}
                 </button>
 
             </form>
@@ -152,14 +152,14 @@
                     <div class="w-full border-t border-border-primary"></div>
                 </div>
                 <div class="relative flex justify-center text-xs">
-                    <span class="px-3 bg-surface-primary text-content-tertiary">{m.divider_text()}</span>
+                    <span class="px-3 bg-surface-primary text-content-tertiary">{$t('divider_text')}</span>
                 </div>
             </div>
 
             <!-- Sign in link -->
             <p class="text-center text-sm text-content-secondary">
-                {m.register_have_account()}
-                <a href={resolve("/login",{})} class="text-accent font-medium hover:underline ml-1">{m.register_sign_in()}</a>
+                {$t('register_have_account')}
+                <a href={resolve("/login",{})} class="text-accent font-medium hover:underline ml-1">{$t('register_sign_in')}</a>
             </p>
 
         </div>

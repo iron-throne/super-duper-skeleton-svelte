@@ -1,5 +1,5 @@
-<script lang="ts">
-    import * as m from '$lib/paraglide/messages';
+﻿<script lang="ts">
+    import { t } from '$shared/i18n'
     import { page } from '$app/state';
     import { Eye, EyeSlash, ExclamationCircleFill } from 'svelte-bootstrap-icons';
     import { resolve } from '$app/paths';
@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-    <title>{m.reset_title()}</title>
+    <title>{$t('reset_title')}</title>
 </svelte:head>
 
 <div class="min-h-screen bg-surface-tertiary flex items-center justify-center px-4 py-12">
@@ -42,14 +42,14 @@
 
         <a href={resolve("/",{})} class="flex items-center justify-center gap-2 mb-8">
             <span class="text-accent text-xl leading-none">✦</span>
-            <span class="font-semibold text-content-primary tracking-wide text-lg">{m.app_name()}</span>
+            <span class="font-semibold text-content-primary tracking-wide text-lg">{$t('app_name')}</span>
         </a>
 
         <div class="bg-surface-primary rounded-2xl shadow-xl border  p-8">
 
             <div class="mb-8 text-center">
-                <h1 class="text-2xl font-bold text-content-primary mb-1">{m.reset_title()}</h1>
-                <p class="text-sm text-content-secondary">{m.reset_subtitle()}</p>
+                <h1 class="text-2xl font-bold text-content-primary mb-1">{$t('reset_title')}</h1>
+                <p class="text-sm text-content-secondary">{$t('reset_subtitle')}</p>
             </div>
 
             <form onsubmit={handleSubmit} class="flex flex-col gap-5">
@@ -57,14 +57,14 @@
                 <!-- New password -->
                 <div class="flex flex-col gap-1.5">
                     <label for="password" class="text-sm font-medium text-content-primary">
-                        {m.reset_new_label()}
+                        {$t('reset_new_label')}
                     </label>
                     <div class="relative">
                         <input
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             bind:value={password}
-                            placeholder={m.reset_new_placeholder()}
+                            placeholder={$t('reset_new_placeholder')}
                             required
                             autocomplete="new-password"
                             class="w-full px-4 py-2.5 pr-11 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -84,14 +84,14 @@
                 <!-- Confirm password -->
                 <div class="flex flex-col gap-1.5">
                     <label for="confirm" class="text-sm font-medium text-content-primary">
-                        {m.reset_confirm_label()}
+                        {$t('reset_confirm_label')}
                     </label>
                     <div class="relative">
                         <input
                             id="confirm"
                             type={showConfirm ? 'text' : 'password'}
                             bind:value={confirm}
-                            placeholder={m.reset_confirm_placeholder()}
+                            placeholder={$t('reset_confirm_placeholder')}
                             required
                             autocomplete="new-password"
                             class="w-full px-4 py-2.5 pr-11 rounded-lg border  bg-surface-secondary text-content-primary placeholder:text-content-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
@@ -117,7 +117,7 @@
                 {/if}
 
                 <button type="submit" class="btn btn-primary w-full py-3 text-base font-semibold mt-1">
-                    {m.reset_submit()}
+                    {$t('reset_submit')}
                 </button>
 
             </form>

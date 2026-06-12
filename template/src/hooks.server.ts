@@ -1,22 +1,24 @@
 // src/hooks.server.ts
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { paraglideMiddleware } from '$lib/paraglide/server';
-import { getTextDirection } from '$lib/paraglide/runtime';
 import { sequence } from '@sveltejs/kit/hooks';
 import { AUTH_COOKIE_NAME } from '$shared/config';
 import { env } from '$env/dynamic/private';
 
-/* Paraglide: inject locale + direction into HTML */
-const handleParaglide: Handle = ({ event, resolve }) =>
-    paraglideMiddleware(event.request, ({ request, locale }) => {
-        event.request = request;
-        return resolve(event, {
-            transformPageChunk: ({ html }) =>
-                html
-                    .replace('%paraglide.lang%', locale)
-                    .replace('%paraglide.dir%', getTextDirection(locale))
-        });
+const SUPPORTED_LOCALES = new Set(['en', 'ar', 'es']);
+const RTL_LOCALES = new Set(['ar', 'he', 'fa', 'ur']);
+
+/* I18n: detect locale from Accept-Language → default 'en', inject into HTML */
+const handleI18n: Handle = ({ event, resolve }) => {
+    const header = event.request.headers.get('accept-language')?.split(',')[0]?.split('-')[0];
+    const detected = (header && SUPPORTED_LOCALES.has(header) ? header : null) ?? 'en';
+
+    return resolve(event, {
+        transformPageChunk: ({ html }) =>
+            html
+                .replace('%lang%', detected)
+                .replace('%dir%', RTL_LOCALES.has(detected) ? 'rtl' : 'ltr'),
     });
+};
 
 /* Auth: block access if no session cookie */
 const authHandle: Handle = async ({ event, resolve }) => {
@@ -41,7 +43,7 @@ const authHandle: Handle = async ({ event, resolve }) => {
 };
 
 /* Combine middleware in order */
-export const handle = sequence(handleParaglide, authHandle);
+export const handle = sequence(handleI18n, authHandle);
 
 /* Add headers to all server-side fetch calls, runs before every server‑side fetch */
 export const handleFetch: HandleFetch = async ({ request, fetch }) => {

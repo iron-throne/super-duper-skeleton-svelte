@@ -1,4 +1,3 @@
-import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
@@ -27,11 +26,7 @@ export default defineConfig({
         {
           '$app/navigation': ['goto', 'invalidate', 'invalidateAll'],
           '@sveltejs/kit': ['redirect'],
-        }, {
-          '$lib/paraglide/messages': [
-            ['*', 'm']   // import * as m from '$lib/paraglide/messages'
-          ]
-        }
+        },
       ],
 
       // Generate TypeScript definitions for auto-imported functions
@@ -41,11 +36,5 @@ export default defineConfig({
     // SvelteKit plugin (must come after other Vite plugins)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sveltekit() as unknown as import('vite').PluginOption,
-
-    // Paraglide i18n plugin (for translations)
-    paraglideVitePlugin({
-      project: './project.inlang',
-      outdir: './src/lib/paraglide'
-    }),
   ]
 });

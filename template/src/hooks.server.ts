@@ -7,18 +7,22 @@ import { env } from '$env/dynamic/private';
 const SUPPORTED_LOCALES = new Set(['en', 'ar', 'es']);
 const RTL_LOCALES = new Set(['ar', 'he', 'fa', 'ur']);
 
-/* I18n: detect locale from Accept-Language → default 'en', inject into HTML */
-const handleI18n: Handle = ({ event, resolve }) => {
-    const header = event.request.headers.get('accept-language')?.split(',')[0]?.split('-')[0];
-    const detected = (header && SUPPORTED_LOCALES.has(header) ? header : null) ?? 'en';
+// Server-side locale detection: sets <html lang> and <html dir> on the initial HTML
+// render so the browser gets the right text direction before any JS runs.
+// This is only a best-guess fallback — the real locale lives in localStorage and
+// is applied on the client by initLocale() (see src/lib/shared/i18n/index.ts).
+// Without this, RTL users would see a brief LTR flash on first load.
+// const handleI18n: Handle = ({ event, resolve }) => {
+//     const header = event.request.headers.get('accept-language')?.split(',')[0]?.split('-')[0];
+//     const detected = (header && SUPPORTED_LOCALES.has(header) ? header : null) ?? 'en';
 
-    return resolve(event, {
-        transformPageChunk: ({ html }) =>
-            html
-                .replace('%lang%', detected)
-                .replace('%dir%', RTL_LOCALES.has(detected) ? 'rtl' : 'ltr'),
-    });
-};
+//     return resolve(event, {
+//         transformPageChunk: ({ html }) =>
+//             html
+//                 .replace('%lang%', detected)
+//                 .replace('%dir%', RTL_LOCALES.has(detected) ? 'rtl' : 'ltr'),
+//     });
+// };
 
 /* Auth: block access if no session cookie */
 const authHandle: Handle = async ({ event, resolve }) => {
@@ -43,7 +47,7 @@ const authHandle: Handle = async ({ event, resolve }) => {
 };
 
 /* Combine middleware in order */
-export const handle = sequence(handleI18n, authHandle);
+export const handle = sequence(authHandle);
 
 /* Add headers to all server-side fetch calls, runs before every server‑side fetch */
 export const handleFetch: HandleFetch = async ({ request, fetch }) => {
@@ -59,17 +63,3 @@ export const handleError: HandleServerError = ({ error, event }) => {
         message: 'Something went wrong on the server.'
     };
 };
-
-
-// import { redirect } from '@sveltejs/kit';
-
-// export function handle({ event, resolve }) {
-//   // Force all routes to lowercase so routing becomes case‑insensitive
-//   const lower = event.url.pathname.toLowerCase();
-
-//   if (event.url.pathname !== lower) {
-//     return redirect(301, lower + event.url.search);
-//   }
-
-//   return resolve(event);
-// }

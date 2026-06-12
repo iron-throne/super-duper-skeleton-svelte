@@ -1,10 +1,10 @@
-# super-svelte-skeleton
+# @aryagg/create-super-svelte-skeleton
 
-Svelte 5 starter with auth, i18n, API layer, offline support, and UI components — ready in one command.
+A CLI scaffolding tool. One command gives you a fully wired Svelte 5 + SvelteKit starter.
 
 ---
 
-## Quick start
+## Create a project
 
 ```bash
 npm create @aryagg/super-svelte-skeleton my-app
@@ -15,119 +15,95 @@ npm run dev
 
 App runs at `http://localhost:5173`.
 
----
-
-## Environment variables
-
-Edit `.env` before running:
-
-```env
-PUBLIC_API_URL="https://api.myapp.com"
-PUBLIC_SITE_NAME="My App"
-```
-
-Variables prefixed `PUBLIC_` are available in both browser and server. Others are server-only. Restart `npm run dev` after any change.
+> `npm create` prepends `create-` automatically, so `@aryagg/super-svelte-skeleton` resolves to this package (`@aryagg/create-super-svelte-skeleton`).
 
 ---
 
-## Project structure
+## Packages
 
-```
-src/
-├── routes/
-│   ├── (auth)/          ← login, register, forgot/reset password
-│   ├── (app)/           ← your app pages go here
-│   └── +layout.svelte   ← root layout (locale init, snackbar, loader)
-├── lib/
-│   ├── api/             ← axios client, services, endpoints, types
-│   ├── components/      ← reusable UI components
-│   ├── shared/
-│   │   ├── i18n/        ← translation store (t, locale, setLocale)
-│   │   └── config/      ← app constants
-│   └── stores/          ← auth, config state
-├── hooks.server.ts      ← auth + locale middleware
-messages/
-├── en.json              ← English translations
-├── ar.json              ← Arabic
-└── es.json              ← Spanish
-```
+### `@aryagg/types`
+Shared TypeScript types, interfaces, and enums used across the entire app.
+
+**Includes:**
+- `EUserRole` — user role hierarchy (`GUEST → USER → MANAGER → ADMIN → SUPER_ADMIN`)
+- `ETheme` — light / dark theme enum
+- `EStorageKey` — localStorage key constants
+- `ESnackType` — notification severity levels
+- `IForm`, `IFormField` — form shape interfaces
+- `INavItem` — navigation item interface
+- `REGEX` — shared regex patterns
 
 ---
 
-## Building a page
+### `@aryagg/utils`
+Pure utility functions with no framework dependencies.
 
-**1. Create the route file**
+**Includes:**
+- `getItem` / `removeItem` — typed localStorage helpers
+- `setTheme` — applies theme class to `<html>`
+- `deepClone` — deep object clone
+- `handleApiResponse` — normalizes API responses and surfaces errors
 
+---
+
+### `@aryagg/theme`
+CSS design token package. Imported once in `app.css`:
+
+```css
+@import "@aryagg/theme";
 ```
-src/routes/(app)/dashboard/+page.svelte
-```
 
-**2. Write the page**
+Provides all CSS custom properties for colors, spacing, typography, and surfaces used by the UI kit and Tailwind config.
 
+**Depends on:** nothing (pure CSS)
+
+---
+
+### `@aryagg/ui-kit`
+Svelte 5 component library and reactive stores.
+
+**Components:** `SnackBar`, `Loader`, `Form`, `Avatar`, `DropdownMenu`, `Tabs`
+
+**Stores:** `snackStore`, `loaderStore`, `configStore`
+
+**Usage:**
 ```svelte
 <script lang="ts">
-  import { t } from '$shared/i18n';
+  import { snackStore, SnackBar } from '@aryagg/ui-kit';
+  import { ESnackType } from '@aryagg/types';
+
+  snackStore.show({ type: ESnackType.SUCCESS, message: 'Saved!' });
 </script>
 
-<h1>{$t('dashboard_title')}</h1>
-<p>{$t('dashboard_subtitle')}</p>
+<SnackBar />
 ```
 
-**3. Add the translation key**
-
-In `messages/en.json`:
-```json
-{
-  "dashboard_title": "Dashboard",
-  "dashboard_subtitle": "Welcome back"
-}
-```
-
-Run `npm run machine-translate` to auto-fill `ar.json` and `es.json`.
+**Depends on:** `@aryagg/types`, `@aryagg/theme`
 
 ---
 
-## Calling an API
+### `@aryagg/i18n`
+Minimal i18n engine. Used to create the reactive translation instance in `src/lib/shared/i18n/index.ts`.
 
-Add an endpoint constant in `src/lib/api/endpoints/`:
-
+**Usage:**
 ```ts
-export const ENDPOINTS = {
-  USERS: '/users',
-};
+import { createI18n } from '@aryagg/i18n';
+
+const i18n = createI18n({ locale: 'en', messages: { en, ar, es } });
+i18n.t('key');
+i18n.setLocale('ar');
 ```
 
-Add a service in `src/lib/api/services/`:
+The template wraps this in a Svelte derived store so `$t('key')` is reactive across the app.
 
-```ts
-import { http } from '../http';
-import { ENDPOINTS } from '../endpoints';
-
-export const getUsers = () => http.get(ENDPOINTS.USERS);
-```
-
-Use it in a component:
-
-```svelte
-<script lang="ts">
-  import { getUsers } from '$lib/api/services/users';
-
-  let users = $state([]);
-  onMount(async () => {
-    const res = await getUsers();
-    users = res.data;
-  });
-</script>
-```
+**Depends on:** nothing
 
 ---
 
-## i18n
+### `@aryagg/svelte-layout-kit`
+Svelte 5 layout primitives — sidebar, topbar, page shell.
 
-- Translations live in `messages/*.json`
-- Import the store explicitly in each component: `import { t } from '$shared/i18n'`
-- Use as `$t('key')` in templates (reactive — updates when language changes)
-- Change language: `setLocale('ar')` (auto-imported, persists to localStorage)
+**Depends on:** `@aryagg/types`, `@aryagg/theme`
 
 ---
 

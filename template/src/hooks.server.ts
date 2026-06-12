@@ -4,25 +4,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { AUTH_COOKIE_NAME } from '$shared/config';
 import { env } from '$env/dynamic/private';
 
-const SUPPORTED_LOCALES = new Set(['en', 'ar', 'es']);
-const RTL_LOCALES = new Set(['ar', 'he', 'fa', 'ur']);
-
-// Server-side locale detection: sets <html lang> and <html dir> on the initial HTML
-// render so the browser gets the right text direction before any JS runs.
-// This is only a best-guess fallback — the real locale lives in localStorage and
-// is applied on the client by initLocale() (see src/lib/shared/i18n/index.ts).
-// Without this, RTL users would see a brief LTR flash on first load.
-// const handleI18n: Handle = ({ event, resolve }) => {
-//     const header = event.request.headers.get('accept-language')?.split(',')[0]?.split('-')[0];
-//     const detected = (header && SUPPORTED_LOCALES.has(header) ? header : null) ?? 'en';
-
-//     return resolve(event, {
-//         transformPageChunk: ({ html }) =>
-//             html
-//                 .replace('%lang%', detected)
-//                 .replace('%dir%', RTL_LOCALES.has(detected) ? 'rtl' : 'ltr'),
-//     });
-// };
 
 /* Auth: block access if no session cookie */
 const authHandle: Handle = async ({ event, resolve }) => {

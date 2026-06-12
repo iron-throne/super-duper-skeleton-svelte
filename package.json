@@ -6,6 +6,10 @@
   "bin": {
     "create-super-svelte-skeleton": "cli.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iron-throne/super-duper-skeleton-svelte"
+  },
   "files": [
     "cli.js",
     "template"

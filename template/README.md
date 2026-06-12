@@ -1,237 +1,140 @@
-# SvelteKit 5 Enterprise Application
+# My App
 
-A production-ready, fully-featured SvelteKit 5 application with Runes, Tailwind CSS v3, TypeScript, multi-language support (i18n), dark/light theming, authentication, and more.
+Svelte 5 starter with auth, i18n, API layer, offline support, and UI components.
 
-## 🚀 Quick Start
+---
+
+## Quick start
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Copy environment file
-cp .env.example .env.local
-
-# 3. Start dev server
+cp .env.example .env
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173)
+App runs at `http://localhost:5173`.
 
 ---
 
-## 📁 Project Structure
+## Environment variables
+
+Edit `.env`:
+
+```env
+PUBLIC_API_URL="https://api.myapp.com"
+PUBLIC_SITE_NAME="My App"
+```
+
+Variables prefixed `PUBLIC_` are available in both browser and server. Others are server-only. Restart dev server after changes.
+
+---
+
+## Project structure
 
 ```
 src/
-├── app.css              # Global styles + Tailwind directives
-├── app.html             # HTML template (theme init script)
-├── app.d.ts             # TypeScript app-level declarations
-├── hooks.server.ts      # Server hooks: auth, security headers, route protection
-├── hooks.client.ts      # Client hooks: error handling
-│
+├── routes/
+│   ├── (auth)/          ← login, register, forgot/reset password
+│   ├── (app)/           ← your app pages go here
+│   └── +layout.svelte   ← root layout (locale init, snackbar, loader)
 ├── lib/
-│   ├── components/
-│   │   ├── ui/          # Reusable UI components (Button, Input, IToast, etc.)
-│   │   ├── layout/      # Layout components (Sidebar, Header)
-│   │   └── forms/       # Form-specific components
-│   │
-│   ├── stores/          # Svelte 5 Runes stores (reactive state)
-│   │   ├── auth.store.svelte.ts    # User authentication state
-│   │   ├── theme.store.svelte.ts   # Dark/light mode + accent color
-│   │   ├── i18n.store.svelte.ts    # Language / translations
-│   │   ├── toast.store.svelte.ts   # IToast notifications
-│   │   └── ui.store.svelte.ts      # UI state (sidebar, modals)
-│   │
-│   ├── types/           # TypeScript types, interfaces, enums
-│   │   ├── auth.types.ts
-│   │   ├── api.types.ts
-│   │   ├── ui.types.ts
-│   │   └── user.types.ts
-│   │
-│   ├── constants/       # App-wide constants (routes, config)
-│   ├── utils/           # Utility functions (cn, format, validation)
-│   ├── services/        # API service layer
-│   └── i18n/            # Translations (en, ar, fr, de, es)
-│
-└── routes/
-    ├── +layout.svelte            # Root layout (theme init, toast container)
-    ├── +layout.ts                # Root layout load
-    ├── +layout.server.ts         # Root layout server load (auth)
-    ├── +page.svelte              # Landing page
-    ├── +error.svelte             # Global error page
-    │
-    ├── (auth)/                   # Auth route group (login, register)
-    │   ├── +layout.svelte        # Auth layout (centered card)
-    │   ├── login/
-    │   ├── register/
-    │   └── forgot-password/
-    │
-    ├── (app)/                    # App route group (requires auth)
-    │   ├── +layout.svelte        # App layout (sidebar + header)
-    │   ├── +layout.server.ts     # Auth guard
-    │   ├── dashboard/
-    │   ├── profile/
-    │   └── settings/
-    │
-    └── api/                      # API endpoints
-        └── auth/
-            └── logout/
+│   ├── api/             ← axios client, services, endpoints, types
+│   ├── components/      ← reusable UI components
+│   ├── shared/
+│   │   ├── i18n/        ← translation store (t, locale, setLocale)
+│   │   └── config/      ← app constants
+│   └── stores/          ← auth, config state
+├── hooks.server.ts      ← auth + locale middleware
+messages/
+├── en.json              ← English translations
+├── ar.json              ← Arabic
+└── es.json              ← Spanish
 ```
 
 ---
 
-## ✨ Features
+## Building a page
 
-### 🔐 Authentication
-- Login with email + password
-- Registration with validation
-- Forgot password flow
-- ISession cookies (HTTP-only, secure)
-- Auto-redirect (protected routes → login, auth routes → dashboard)
-- Role-based access control (RBAC) with `EUserRole` enum
+**1. Create the route**
 
-### 🌍 Internationalization (i18n)
-- 5 languages: English, Arabic (RTL!), French, German, Spanish
-- Auto-detects browser language
-- Persists to `localStorage`
-- RTL layout support (Arabic)
-- Reactive via `i18nStore`
+```
+src/routes/(app)/dashboard/+page.svelte
+```
 
-### 🌙 Theming
-- Light / Dark / System theme
-- 4 accent colors: Blue, Purple, Green, Rose
-- CSS custom properties (easy to extend)
-- Persists to `localStorage`
-- FOUC prevention script in `app.html`
+**2. Write the component**
 
-### 📦 State Management (Svelte 5 Runes)
-- `$state` for reactive variables
-- `$derived` for computed values
-- `$effect` for side effects
-- No external state library needed
+```svelte
+<script lang="ts">
+  import { t } from '$shared/i18n';
+</script>
 
-### 🛡️ Security
-- CSRF protection (SvelteKit built-in)
-- HTTP-only session cookies
-- Security headers (X-Frame-Options, etc.)
-- Input validation with Zod schemas
-- Server-side auth guards
+<h1>{$t('dashboard_title')}</h1>
+<p>{$t('dashboard_subtitle')}</p>
+```
 
-### 📐 TypeScript
-- Strict mode enabled
-- Full type coverage
-- Enums: `EUserRole`, `Theme`, `ESnackType`, `ColorVariant`, etc.
-- Interfaces for all data shapes
-- Zod schemas for runtime validation
+**3. Add the translation key**
+
+`messages/en.json`:
+```json
+{
+  "dashboard_title": "Dashboard",
+  "dashboard_subtitle": "Welcome back"
+}
+```
+
+Run `npm run machine-translate` to auto-fill `ar.json` and `es.json`.
 
 ---
 
-## 🛠️ Available Scripts
+## Calling an API
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+`src/lib/api/endpoints/index.ts`:
+```ts
+export const ENDPOINTS = {
+  USERS: '/users',
+};
+```
+
+`src/lib/api/services/users.ts`:
+```ts
+import { http } from '../http';
+import { ENDPOINTS } from '../endpoints';
+
+export const getUsers = () => http.get(ENDPOINTS.USERS);
+```
+
+Use in a component:
+```svelte
+<script lang="ts">
+  import { getUsers } from '$lib/api/services/users';
+
+  let users = $state([]);
+  onMount(async () => {
+    const res = await getUsers();
+    users = res.data;
+  });
+</script>
+```
+
+---
+
+## i18n
+
+- Import `t` explicitly in each component: `import { t } from '$shared/i18n'`
+- Use as `$t('key')` in templates — reactive, updates when language changes
+- Change language: `setLocale('ar')` (auto-imported, persists to localStorage)
+- RTL is handled automatically — `<html dir>` updates on language switch
+
+---
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
 | `npm run preview` | Preview production build |
-| `npm run check` | TypeScript + Svelte checks |
+| `npm run check` | TypeScript + Svelte type check |
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier |
-
----
-
-## 🔧 Adding New Pages
-
-### 1. Public page
-```
-src/routes/about/+page.svelte
-```
-
-### 2. Protected page (requires login)
-```
-src/routes/(app)/reports/+page.svelte
-src/routes/(app)/reports/+page.server.ts
-```
-
-### 3. API endpoint
-```
-src/routes/api/users/+server.ts
-```
-
----
-
-## 🌐 Adding a New Language
-
-1. Create `src/lib/i18n/locales/de.ts` (copy from `en.ts`)
-2. Add translations
-3. Import in `src/lib/i18n/index.ts`:
-   ```ts
-   import de from './locales/de';
-   const locales = { en, ar, fr, de };
-   ```
-4. Add to `SUPPORTED_LANGUAGES` in `src/lib/constants/index.ts`
-
----
-
-## 🎨 Changing Theme Colors
-
-Edit `THEME_COLORS` in `src/lib/constants/index.ts` and add RGB values.
-The settings page automatically shows all available colors.
-
----
-
-## 🚀 Deployment
-
-This app uses `@sveltejs/adapter-auto` which auto-detects:
-- **Vercel** → serverless functions
-- **Netlify** → edge functions
-- **Node.js** → node server
-
-For specific targets, replace `adapter-auto` with:
-- `@sveltejs/adapter-node`
-- `@sveltejs/adapter-vercel`
-- `@sveltejs/adapter-netlify`
-- `@sveltejs/adapter-static` (for SSG)
-
----
-
-## 🔑 Environment Variables
-
-| Variable | Description |
-|----------|-------------|
-| `PUBLIC_APP_NAME` | App display name |
-| `PUBLIC_APP_URL` | App URL |
-| `AUTH_SECRET` | Secret for session signing (min 32 chars) |
-
----
-
-## 🏗️ Production Checklist
-
-- [ ] Replace demo auth with real database
-- [ ] Use JWT or DB-backed sessions instead of base64 cookies
-- [ ] Set `AUTH_SECRET` to a strong random string
-- [ ] Enable HTTPS
-- [ ] Set up error tracking (Sentry, etc.)
-- [ ] Add rate limiting to auth endpoints
-- [ ] Configure proper CORS if needed
-- [ ] Remove demo data from dashboard
-
----
-
-## 📚 Prerender
-📝 Prerendering (SvelteKit)
-SvelteKit can prerender routes, generating static HTML at build time.
-export const prerender = true;   // enable prerender
-export const prerender = false;  // disable prerender
-export const prerender = 'auto'; // prerender if possible, otherwise SSR
-A route can be prerendered only if all users receive the same content. Pages with actions, user‑specific data, or server‑only logic cannot be prerendered.
-
-## 🌍 Paraglide (i18n) — How It Works
-Paraglide adds simple multilingual support to SvelteKit. When you run npx sv add paraglide, it automatically sets up everything needed for translations:
-Creates src/lib/paraglide/ → contains the translation engine and helper functions.
-Adds i18n runtime + server middleware → detects the user’s language on each request.
-Updates app.html → adds %paraglide.lang% so the correct <html lang=""> is injected.
-Configures hooks.server.ts → connects Paraglide to SvelteKit’s request pipeline.
-Creates a translation project → where your en.json, ar.json, etc. live.
-Installs required dependencies → so translations work on both server and client.
-Workflow:  
-Add your messages → import t() in components → Paraglide auto‑detects the user’s language and shows the right text.
+| `npm run machine-translate` | Auto-fill missing translation keys |

@@ -38,7 +38,7 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
-		"@aryagg/i18n": "file:../../skeleton-packages/packages/i18n",
+		"@aryagg/i18n": "^1.0.0",
 		"@aryagg/ui-kit": "^0.2.1",
 		"@aryagg/utils": "^1.1.2",
 		"@sveltejs/adapter-node": "^5.5.4",

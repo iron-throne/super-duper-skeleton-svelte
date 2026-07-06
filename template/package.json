@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@aryagg/i18n": "^1.0.0",
+		"@aryagg/layout-kit": "^0.0.2",
 		"@aryagg/ui-kit": "^0.2.1",
 		"@aryagg/utils": "^1.1.2",
 		"@sveltejs/adapter-node": "^5.5.4",

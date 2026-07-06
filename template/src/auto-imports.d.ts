@@ -7,7 +7,9 @@
 export {}
 declare global {
   const T: typeof import('$shared/i18n').T
+  const a: typeof import('$app/paths').a
   const afterUpdate: typeof import('svelte').afterUpdate
+  const assets: typeof import('$app/paths').assets
   const beforeUpdate: typeof import('svelte').beforeUpdate
   const blur: typeof import('svelte/transition').blur
   const createEventDispatcher: typeof import('svelte').createEventDispatcher
@@ -33,6 +35,7 @@ declare global {
   const onMount: typeof import('svelte').onMount
   const readable: typeof import('svelte/store').readable
   const redirect: typeof import('@sveltejs/kit').redirect
+  const resolve: typeof import('$app/paths').resolve
   const scale: typeof import('svelte/transition').scale
   const setContext: typeof import('svelte').setContext
   const setLocale: typeof import('$shared/i18n').setLocale

@@ -1,7 +1,6 @@
 ﻿<script lang="ts">
     import { t } from '$shared/i18n'
     import { Eye, EyeSlash } from 'svelte-bootstrap-icons';
-    import { resolve } from '$app/paths';
 
     let name = $state('');
     let email = $state('');

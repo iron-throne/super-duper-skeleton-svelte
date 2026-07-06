@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-		{#each stats as s}
+		{#each stats as s, i (i)}
 			<div class="bg-surface-primary rounded-xl border p-5 flex items-start gap-4 shadow-sm">
 				<div class="p-2.5 rounded-lg {s.bg} {s.color} shrink-0"><s.icon width={20} height={20} /></div>
 				<div class="min-w-0">
@@ -72,7 +72,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each activity as row, i}
+						{#each activity as row, i (i)}
 							<tr class="border-t /60 {i % 2 === 1 ? 'bg-surface-secondary/20' : ''}">
 								<td class="px-5 py-3 font-medium text-content-primary whitespace-nowrap">{row.user}</td>
 								<td class="px-4 py-3 text-content-secondary">{row.action}</td>
@@ -88,8 +88,8 @@
 		<div class="bg-surface-primary rounded-xl border shadow-sm">
 			<div class="px-5 py-4 border-b"><h3 class="text-sm font-semibold text-content-primary">Quick Actions</h3></div>
 			<div class="p-4 flex flex-col gap-2">
-				{#each actions as a}
-					<a href={a.href} class="flex items-center gap-3 px-4 py-3 rounded-lg border hover:bg-surface-secondary transition-colors group">
+				{#each actions as a, aInd(aInd)}
+					<a href={resolve(a.href)} class="flex items-center gap-3 px-4 py-3 rounded-lg border hover:bg-surface-secondary transition-colors group">
 						<span class="{a.color} group-hover:scale-110 transition-transform"><a.icon width={18} height={18} /></span>
 						<span class="text-sm font-medium text-content-primary">{a.label}</span>
 						<ArrowUpRight width={13} height={13} class="ml-auto text-content-tertiary group-hover:text-content-secondary transition-colors" />

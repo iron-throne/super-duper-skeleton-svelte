@@ -3,6 +3,7 @@
 
 /* 2. Scan ui-kit for Tailwind classes (node_modules are skipped by default in v4) */
 @source "../node_modules/@aryagg/ui-kit/dist";
+@source "../node_modules/@aryagg/layout-kit/dist";
 
 /* 3. Project config — adds your custom colors/plugins on top of the theme */
 @config "./lib/tailwind.config.ts";

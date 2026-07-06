@@ -1,4 +1,5 @@
 ﻿<script lang="ts">
+	import { Header3 } from '@aryagg/layout-kit';
     import { t } from '$shared/i18n'
     import { Topbar } from '$widgets/topbar';
     import {
@@ -10,8 +11,6 @@
         Grid3x3Gap,
         CodeSlash,
     } from 'svelte-bootstrap-icons';
-    import { resolve } from '$app/paths';
-
     const features = [
         {
             title: 'Authentication',
@@ -57,7 +56,13 @@
 </svelte:head>
 
 <div class="min-h-screen flex flex-col bg-surface-primary text-primary overflow-x-hidden">
-
+<Header3  brand="MyBrand"
+  brandHref="/"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" }
+  ]} ></Header3>
     <Topbar />
 
     

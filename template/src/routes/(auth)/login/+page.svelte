@@ -2,7 +2,6 @@
     import { t } from '$shared/i18n'
     import { enhance } from '$app/forms';
     import { Eye, EyeSlash } from 'svelte-bootstrap-icons';
-    import { resolve } from '$app/paths';
 
     let { form }: { form?: { error?: string } | null } = $props();
 

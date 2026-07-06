@@ -1,6 +1,5 @@
 ﻿<script lang="ts">
     import { t } from '$shared/i18n';
-    import { resolve } from '$app/paths';
     import { EnvelopeFill } from 'svelte-bootstrap-icons';
 
     let email = $state('');

@@ -25,6 +25,7 @@ export default defineConfig({
         // Auto-import SvelteKit functions
         {
           '$app/navigation': ['goto', 'invalidate', 'invalidateAll'],
+          '$app/paths': ['resolve', 'assets'],
           '@sveltejs/kit': ['redirect'],
         },
       ],

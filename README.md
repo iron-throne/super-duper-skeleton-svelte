@@ -30,7 +30,7 @@ Shared TypeScript types, interfaces, and enums used across the entire app.
 - `EStorageKey` — localStorage key constants
 - `ESnackType` — notification severity levels
 - `IForm`, `IFormField` — form shape interfaces
-- `INavItem` — navigation item interface
+- `INavItem` — navigation item 
 - `REGEX` — shared regex patterns
 
 ---

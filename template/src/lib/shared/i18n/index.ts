@@ -1,10 +1,19 @@
-import { createI18n } from '@aryagg/i18n';
+import { createI18n, ELanguage } from '@aryagg/i18n';
 import { writable, derived, get } from 'svelte/store';
 import { browser } from '$app/environment';
 
-import en from '../messages/en.json';
-import ar from '../messages/ar.json';
-import es from '../messages/es.json';
+// Each locale's messages are split into one file per feature/page under
+// messages/<locale>/<namespace>.json, so no single file grows unbounded as
+// the app adds pages. Each locale folder's index.ts merges its namespace
+// files back into one flat object — adding a namespace to an existing
+// locale needs no change here, only a brand-new locale does.
+import en from '../messages/en';
+import ar from '../messages/ar';
+import es from '../messages/es';
+
+import { getItem, setItem } from '@aryagg/utils';
+import { EStorageKey } from '@aryagg/types';
+
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -22,14 +31,8 @@ export type TranslationKey = keyof typeof en;
 // List of available locales
 export const locales = Object.keys(_messages) as SupportedLocale[];
 
-// Languages that read right‑to‑left
-const RTL_LOCALES = new Set<string>(['ar', 'he', 'fa', 'ur']);
-
-// Key used in localStorage
-const STORAGE_KEY = 'locale';
-
 // Default language
-const DEFAULT_LOCALE: SupportedLocale = 'en';
+const DEFAULT_LOCALE: SupportedLocale = ELanguage.EN;
 
 // ── Core i18n instance ────────────────────────────────────────────────────────
 
@@ -66,24 +69,12 @@ export const t = derived(locale, ($locale) => {
         i18n.t(key, params);
 });
 
-/** True if the current language is right‑to‑left */
-export const isRTL = derived(locale, ($locale) => RTL_LOCALES.has($locale));
-
-/** "rtl" or "ltr" — bind directly to <html dir> */
-export const dir = derived(isRTL, ($isRTL) => ($isRTL ? 'rtl' : 'ltr') as 'rtl' | 'ltr');
-
 // ── Locale management ─────────────────────────────────────────────────────────
 
 /** Get the current locale value (non‑reactive) */
 export function getLocale(): SupportedLocale {
     return get(locale);
 }
-
-/** Get text direction for any locale */
-export function getTextDirection(loc?: string): 'rtl' | 'ltr' {
-    return RTL_LOCALES.has(loc ?? getLocale()) ? 'rtl' : 'ltr';
-}
-
 /**
  * Change the active locale.
  * Saves to localStorage and updates <html lang> + <html dir>.
@@ -99,9 +90,9 @@ export function setLocale(next: string): void {
 
     // Update browser state
     if (browser) {
-        localStorage.setItem(STORAGE_KEY, l);
+        setItem(EStorageKey.LANGUAGE, l)
         document.documentElement.lang = l;
-        document.documentElement.dir = RTL_LOCALES.has(l) ? 'rtl' : 'ltr';
+        document.documentElement.dir = i18n.dir();
     }
 }
 
@@ -112,7 +103,7 @@ export function setLocale(next: string): void {
 export function initLocale(serverLocale?: string): void {
     if (!browser) return;
 
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = getItem(EStorageKey.LANGUAGE);
     setLocale(stored ?? serverLocale ?? DEFAULT_LOCALE);
 }
 

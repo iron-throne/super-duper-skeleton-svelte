@@ -38,8 +38,8 @@
 
             <!-- Left: Icon in circle -->
             <div class="shrink-0">
-                <div class="flex h-72 w-72 items-center justify-center rounded-full bg-error">
-                    <div class="text-error opacity-90 animate-bounce duration-300" >
+                <div class="flex size-72 items-center justify-center rounded-full bg-error text-on-error">
+                    <div class="text-on-error opacity-90 animate-bounce duration-300" >
                         <LightbulbOff width={140} height={140} />
                     </div>
                 </div>

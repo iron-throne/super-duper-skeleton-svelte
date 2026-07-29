@@ -1,29 +1,34 @@
 :root {
-  --surface-primary:   #1e2a3a;  /* cards, modals, elevated surfaces */
-  --surface-secondary: #151f2e;  /* panels, inputs, sidebars */
-  --surface-tertiary:  #0d1520;  /* page background / deepest layer */
+  color-scheme: dark;
 
-  --on-surface-primary:   #f1f5f9;
+  --surface-primary: #1e2a3a;
+  /* cards, modals, elevated surfaces */
+  --surface-secondary: #151f2e;
+  /* panels, inputs, sidebars */
+  --surface-tertiary: #0d1520;
+  /* page background / deepest layer */
+
+  --on-surface-primary: #f1f5f9;
   --on-surface-secondary: #94a3b8;
-  --on-surface-tertiary:  #64748b;
+  --on-surface-tertiary: #64748b;
 
   --semantic-success: #4ade80;
   --semantic-warning: #fbbf24;
-  --semantic-error:   #f87171;
-  --semantic-info:    #818cf8;
+  --semantic-error: #f87171;
+  --semantic-info: #818cf8;
 
   /* fixed accent — brighter than light-mode red so it reads well on dark surfaces */
   --semantic-accent: #e53e3e;
 
-  --text-primary:   #f1f5f9;
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
-  --text-tertiary:  #64748b;
+  --text-tertiary: #64748b;
 
   --on-success: #052e16;
   --on-warning: #1c1002;
-  --on-error:   #450a0a;
-  --on-info:    #1e1b4b;
-  --on-accent:  #ffffff;
+  --on-error: #450a0a;
+  --on-info: #1e1b4b;
+  --on-accent: #ffffff;
 
   /* fixed border */
   --border-primary: #2d3f55;

@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   --surface-primary: #ffffff;
   --surface-secondary: #fafafa;
   --surface-tertiary: #f8f8f8;

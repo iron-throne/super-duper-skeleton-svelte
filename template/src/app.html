@@ -27,9 +27,25 @@
 	<link id="theme-style" rel="stylesheet" href="styles/theme-light.css" />
 
 	<script>
-		if (localStorage.getItem('theme') === 'dark') {
-			document.getElementById('theme-style').href = 'styles/theme-dark.css';
-		}
+		(function () {
+			var themeLink = document.getElementById('theme-style');
+
+			if (localStorage.getItem('theme') === 'dark') {
+				themeLink.href = themeLink.href.replace(/theme-(dark|light)\.css(?:$|\?)/, 'theme-dark.css');
+			}
+
+			// Vite (dev-mode HMR) and SvelteKit keep appending <style>/<link> tags to <head>
+			// after load, which would otherwise out-rank theme-style in the cascade. Keep it
+			// pinned as the last child of <head> so it always wins.
+			var head = document.head;
+			function pinToBottom() {
+				if (head.lastElementChild !== themeLink) {
+					head.appendChild(themeLink);
+				}
+			}
+			pinToBottom();
+			new MutationObserver(pinToBottom).observe(head, { childList: true });
+		})();
 	</script>
 </head>
 

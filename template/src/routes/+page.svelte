@@ -1,197 +1,300 @@
 ﻿<script lang="ts">
-	import { Header } from '@aryagg/layout-kit';
-    import { t } from '$shared/i18n'
-    import { Topbar } from '$widgets/topbar';
-    import {
-        ArrowRight,
-        LightningCharge,
-        ShieldLock,
-        Sun,
-        Globe2,
-        Grid3x3Gap,
-        CodeSlash,
-    } from 'svelte-bootstrap-icons';
-    const features = [
-        {
-            title: 'Authentication',
-            desc: 'Login, register, forgot & reset password flows with server-side session management.',
-            tag: 'Ready',
-            href: resolve('/register', {}),
-            icon: ShieldLock,
-        },
-        {
-            title: 'Theming System',
-            desc: 'Light and dark themes using CSS variables with persistent user preference storage.',
-            tag: 'Built-in',
-            href: null,
-            icon: Sun,
-        },
-        {
-            title: 'Internationalization',
-            desc: '8 languages out of the box. RTL-aware layout with cookie-persisted locale switching.',
-            tag: '8 Languages',
-            href: null,
-            icon: Globe2,
-        },
-        {
-            title: 'Component Library',
-            desc: 'Over 20 pre-built UI components ready to use and customise across your app.',
-            tag: '20+ Items',
-            href: null,
-            icon: Grid3x3Gap,
-        },
-        {
-            title: 'TypeScript',
-            desc: 'Strict TypeScript throughout — full type safety from routes to components.',
-            tag: 'Strict Mode',
-            href: null,
-            icon: CodeSlash,
-        },
-    ];
+	// Reference page: shows @aryagg/layout-kit (Topbar, CollapsibleSidebar) providing the
+	// app chrome, with @aryagg/ui-kit components filling in the page content.
+	import { Topbar, CollapsibleSidebar } from '@aryagg/layout-kit';
+	import {
+		Button,
+		Badge,
+		Avatar,
+		InputField,
+		MetricCard,
+		Card,
+		Tabs,
+		DataTable,
+		Alert,
+		snackStore,
+		type TabItem,
+	} from '@aryagg/ui-kit';
+	import { ESize, ETheme, EInputType, EDataType, type IMenu } from '@aryagg/types';
+	import {
+		Grid3x3GapFill,
+		JournalBookmarkFill,
+		PeopleFill,
+		BarChartFill,
+		GearFill,
+		PlusLg,
+		Building,
+		Folder2Open,
+		Clock,
+	} from 'svelte-bootstrap-icons';
+
+	let theme = $state(ETheme.LIGHT);
+	let sidebarCollapsed = $state(false);
+
+	// ── Topbar ──────────────────────────────────────────────────────
+	const topMenus: IMenu[] = [
+		{ id: 'dashboard', label: 'Dashboard', href:"/", selected: true },
+		{ id: 'courses', label: 'Courses' },
+		{ id: 'reports', label: 'Reports' },
+	];
+
+	const profileItems: IMenu[] = [
+		{ id: 'profile', label: 'Your profile' },
+		{ id: 'settings', label: 'Settings' },
+		{ id: 'divider', label: '' },
+		{ id: 'logout', label: 'Sign out' },
+	];
+
+	// ── Sidebar ─────────────────────────────────────────────────────
+	const sidebarMenus: IMenu[] = [
+		{ id: 'overview', label: 'Overview', icon: Grid3x3GapFill, selected: true },
+		{
+			id: 'catalog',
+			label: 'Catalog',
+			icon: JournalBookmarkFill,
+			divider: true,
+			children: [
+				{ id: 'all-courses', label: 'All courses' },
+				{ id: 'categories', label: 'Categories' },
+			],
+		},
+		{ id: 'students', label: 'Students', icon: PeopleFill },
+		{ id: 'reports', label: 'Reports', icon: BarChartFill },
+		{ id: 'settings', label: 'Settings', icon: GearFill },
+	];
+
+	// ── Tabs + table ────────────────────────────────────────────────
+	const studentTabs: TabItem[] = [
+		{ id: 'active', label: 'Active', badge: 4 },
+		{ id: 'invited', label: 'Invited', badge: 2 },
+	];
+	let activeTab = $state('active');
+
+	const studentColumns = [
+		{ key: 'name', label: 'Name', sortable: true, type: EDataType.STRING },
+		{ key: 'course', label: 'Course', sortable: true, type: EDataType.STRING },
+		{ key: 'progress', label: 'Progress', type: EDataType.STRING },
+		{ key: 'enrolled', label: 'Enrolled', sortable: true, type: EDataType.DATE },
+	];
+	const activeStudents = [
+		{
+			name: 'Sarah Chen',
+			course: 'Structural Design 101',
+			progress: '82%',
+			enrolled: '2026-05-12',
+		},
+		{
+			name: 'Marcus Weber',
+			course: 'BIM Coordination',
+			progress: '64%',
+			enrolled: '2026-04-30',
+		},
+		{
+			name: 'Aisha Khan',
+			course: 'Site Safety Basics',
+			progress: '97%',
+			enrolled: '2026-03-18',
+		},
+		{
+			name: 'David Kim',
+			course: 'Structural Design 101',
+			progress: '45%',
+			enrolled: '2026-06-02',
+		},
+	];
+	const invitedStudents = [
+		{ name: 'Elena Rossi', course: 'BIM Coordination', progress: '—', enrolled: '2026-07-20' },
+		{
+			name: 'Tom Fischer',
+			course: 'Site Safety Basics',
+			progress: '—',
+			enrolled: '2026-07-22',
+		},
+	];
+
+	// ── Form ────────────────────────────────────────────────────────
+	let courseName = $state('');
+	let category = $state('architecture');
+
+	function handleSave() {
+		snackStore.showSuccess(courseName ? `"${courseName}" saved.` : 'Course saved.');
+	}
 </script>
 
 <svelte:head>
-    <title>{$t('home_title')}</title>
-    <meta name="description" content={$t('home_description')} />
+	<title>Component showcase</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col bg-surface-primary text-primary overflow-x-hidden">
-<Header  brand="MyBrand"
-  brandHref="/"
-  items={[
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" }
-  ]} ></Header>
-    <Topbar />
+<div class="bg-surface-tertiary text-primary flex h-screen w-screen flex-col overflow-hidden">
+	<Topbar
+		brand="Skeleton Project"
+		brandHref="#"
+		menus={topMenus}
+		activeHref="#"
+		searchField={{
+			id: 'showcase-search',
+			key: 'search',
+			label: '',
+			placeholder: 'Search courses…',
+			type: EInputType.SEARCH,
+		}}
+		userName="Jordan Lee"
+		profileLabel="Jordan Lee"
+		{profileItems}
+		showThemeToggle
+		bind:theme
+	/>
 
-    
-    <!-- HERO -->
-    <section class="flex-1 flex flex-col items-center justify-center px-6 py-20 text-center">
+	<div class="flex min-h-0 flex-1">
+		<CollapsibleSidebar menus={sidebarMenus} bind:collapsed={sidebarCollapsed}>
+			{#snippet headerSlot()}
+				<span class="text-primary text-sm font-bold">Skeleton Project</span>
+			{/snippet}
+		</CollapsibleSidebar>
 
-        <!-- Logo mark -->
-        <div class="relative mb-10">
-            <div class="absolute inset-0 rounded-full bg-accent/15 blur-3xl scale-[2.5] pointer-events-none"></div>
-            <div class="relative w-20 h-20 rounded-3xl bg-accent flex items-center justify-center shadow-2xl rotate-12">
-                <span class="-rotate-12 text-on-accent">
-                    <LightningCharge width={36} height={36} />
-                </span>
-            </div>
-        </div>
+		<main class="min-w-0 flex-1 overflow-y-auto p-6">
+			<div class="mx-auto space-y-6">
+				<!-- Page header -->
+				<div class="flex flex-wrap items-center justify-between gap-3">
+					<div>
+						<h1 class="text-primary text-xl font-bold">Course dashboard</h1>
+						<p class="text-secondary mt-0.5 text-sm">
+							layout-kit chrome (Topbar + CollapsibleSidebar) wrapping ui-kit
+							components.
+						</p>
+					</div>
+					<Button
+						label="New course"
+						icon={PlusLg}
+						onclick={() => snackStore.showInfo('Open the course builder.')}
+					/>
+				</div>
 
-        <!-- Eyebrow badge -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold tracking-[0.15em] uppercase mb-7">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-            {$t('hero_eyebrow')}
-        </div>
+				<Alert variant="info" title="Sample page" dismissible>
+					This route is a reference for wiring <strong>@aryagg/layout-kit</strong> and
+					<strong>@aryagg/ui-kit</strong> together — it is not linked from any navigation.
+				</Alert>
 
-        <!-- Heading -->
-        <h1 class="text-5xl md:text-7xl font-bold leading-[1.06] tracking-tight text-primary mb-5 max-w-2xl">
-            {$t('home_welcome')}
-        </h1>
+				<!-- Metrics: atoms Card, exported as MetricCard, variant="metric" -->
+				<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+					<MetricCard
+						variant="metric"
+						eyebrow="Active courses"
+						value="128"
+						trend="up"
+						trendLabel="+6 this month"
+						tone="accent"
+						icon={JournalBookmarkFill}
+						chartValues={[40, 44, 42, 48, 51, 49, 55, 58, 60, 63]}
+						interactive
+					/>
+					<MetricCard
+						variant="metric"
+						eyebrow="Students"
+						value="4,392"
+						trend="up"
+						trendLabel="+212 this week"
+						tone="success"
+						icon={PeopleFill}
+						chartValues={[20, 24, 22, 28, 31, 29, 37, 41, 39, 45]}
+						interactive
+					/>
+					<MetricCard
+						variant="metric"
+						eyebrow="Completion rate"
+						value="76%"
+						trend="up"
+						trendLabel="+3 pts"
+						tone="info"
+						icon={Building}
+						chartValues={[60, 62, 61, 64, 66, 65, 70, 72, 74, 76]}
+						interactive
+					/>
+					<MetricCard
+						variant="metric"
+						eyebrow="At risk"
+						value="9"
+						trend="down"
+						trendLabel="-2 vs last week"
+						tone="warning"
+						icon={Clock}
+						chartValues={[15, 14, 13, 12, 11, 10, 9, 10, 9, 9]}
+						interactive
+					/>
+				</div>
 
-        <!-- Subtitle -->
-        <p class="text-secondary text-lg md:text-xl leading-relaxed max-w-md mb-10">
-            {$t('home_subtitle')}
-        </p>
+				<div class="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_320px]">
+					<!-- MetricCard variant="panel" behaves like a plain content panel -->
+					<MetricCard variant="panel" title="Students">
+						<Tabs tabs={studentTabs} bind:active={activeTab}>
+							<DataTable
+								columns={studentColumns}
+								rows={activeTab === 'active' ? activeStudents : invitedStudents}
+								searchable
+								pageSize={5}
+							/>
+						</Tabs>
+					</MetricCard>
 
-        <!-- CTAs -->
-        <div class="flex flex-wrap items-center justify-center gap-3 mb-14">
-            <a
-                href={resolve('/register', {})}
-                class="no-underline inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-accent text-on-accent font-semibold text-base transition-all duration-200 shadow-lg hover:opacity-90 hover:-translate-y-0.5"
-            >
-                {$t('home_register_btn')}
-                <ArrowRight width={15} height={15} />
-            </a>
-            <a
-                href={resolve('/login', {})}
-                class="no-underline inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-accent/40 text-accent hover:bg-accent/10 font-semibold text-base transition-all duration-200 hover:-translate-y-0.5"
-            >
-                {$t('home_login_btn')}
-            </a>
-        </div>
+					<MetricCard
+						variant="panel"
+						title="Quick access"
+						badge="2 pinned"
+						icon={Folder2Open}
+					>
+						<ul class="divide-border-primary divide-y text-sm">
+							<li class="flex items-center gap-3 py-2.5">
+								<Avatar name="Sarah Chen" size={ESize.XS} status="online" />
+								<div class="min-w-0 flex-1">
+									<div class="truncate font-medium">Structural Design 101</div>
+									<div class="text-tertiary text-[10px]">42 students</div>
+								</div>
+								<Badge variant="success" size={ESize.XS}>82%</Badge>
+							</li>
+							<li class="flex items-center gap-3 py-2.5">
+								<Avatar name="Marcus Weber" size={ESize.XS} status="away" />
+								<div class="min-w-0 flex-1">
+									<div class="truncate font-medium">BIM Coordination</div>
+									<div class="text-tertiary text-[10px]">28 students</div>
+								</div>
+								<Badge variant="amber" size={ESize.XS}>64%</Badge>
+							</li>
+						</ul>
+					</MetricCard>
+				</div>
 
-        <!-- Stats -->
-        <div class="flex items-center gap-6 sm:gap-10">
-            <div>
-                <p class="text-2xl font-bold text-primary">{$t('hero_stat1_value')}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat1_label')}</p>
-            </div>
-            <div class="w-px h-8 bg-border-primary"></div>
-            <div>
-                <p class="text-2xl font-bold text-primary">{$t('hero_stat2_value')}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat2_label')}</p>
-            </div>
-            <div class="w-px h-8 bg-border-primary"></div>
-            <div>
-                <p class="text-2xl font-bold text-primary">{$t('hero_stat3_value')}</p>
-                <p class="text-[11px] text-tertiary uppercase tracking-widest mt-1">{$t('hero_stat3_label')}</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES GRID -->
-    <section class="w-full max-w-5xl mx-auto px-6 pb-24">
-
-        <!-- Section divider label -->
-        <div class="flex items-center gap-4 mb-8">
-            <span class="h-px flex-1 bg-linear-to-r from-transparent to-accent/30"></span>
-            <span class="section-label text-accent">What's Included</span>
-            <span class="h-px flex-1 bg-linear-to-l from-transparent to-accent/30"></span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {#each features as f, i (i)}
-                <div class="group flex items-start gap-4 p-5 rounded-2xl bg-surface-secondary border border-border-primary hover:border-accent/40 hover:bg-accent/3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
-
-                    <!-- Icon bubble -->
-                    <div class="flex-none w-10 h-10 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center transition-colors shrink-0 text-accent">
-                        <svelte:component this={f.icon} width={20} height={20} />
-                    </div>
-
-                    <!-- Text -->
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between gap-2 mb-1.5">
-                            <h3 class="text-sm font-semibold text-primary">{f.title}</h3>
-                            <span class="flex-none text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-accent/10 text-accent">{f.tag}</span>
-                        </div>
-                        <p class="text-xs text-secondary leading-relaxed">{f.desc}</p>
-                        {#if f.href}
-                            <a href={f.href} class="no-underline inline-flex items-center gap-1 mt-3 text-xs font-medium text-accent hover:gap-2 transition-all">
-                                Get started <ArrowRight width={11} height={11} />
-                            </a>
-                        {/if}
-                    </div>
-                </div>
-            {/each}
-        </div>
-    </section>
-
-    <!-- MARQUEE STRIP — unchanged -->
-    <div class="sticky flex-none bottom-0 z-40 border-t border-border-primary bg-surface-primary/80 backdrop-blur-sm overflow-hidden py-3">
-        <div class="flex gap-10 w-max marquee-track items-center">
-            {#each [0,1,2,3,4,5,6,7] as i (i)}
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_1')}</span>
-                <span class="text-accent text-xs">✦</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_2')}</span>
-                <span class="text-accent text-xs">◈</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_3')}</span>
-                <span class="text-accent text-xs">✦</span>
-                <span class="text-tertiary text-xs tracking-[0.18em] uppercase whitespace-nowrap">{$t('marquee_4')}</span>
-                <span class="text-accent text-xs">◈</span>
-            {/each}
-        </div>
-    </div>
-
+				<!-- molecules Card: a different, simpler component from the same package.
+				     Unlike MetricCard, its content goes through named snippet props. -->
+				<Card
+					variant="outlined"
+					padding="lg"
+					title="Add a course"
+					subtitle="InputField + Button"
+				>
+					{#snippet childrenSlot()}
+						<div class="grid gap-4 sm:grid-cols-2">
+							<InputField
+								label="Course name"
+								bind:value={courseName}
+								placeholder="e.g. Site Safety Basics"
+							/>
+							<InputField
+								label="Category"
+								type="select"
+								bind:value={category}
+								options={[
+									{ label: 'Architecture', value: 'architecture' },
+									{ label: 'Structural', value: 'structural' },
+									{ label: 'Safety', value: 'safety' },
+								]}
+							/>
+						</div>
+					{/snippet}
+					{#snippet footerSlot()}
+						<Button label="Save course" onclick={handleSave} />
+					{/snippet}
+				</Card>
+			</div>
+		</main>
+	</div>
 </div>
-
-<style>
-    .marquee-track {
-        animation: marquee 28s linear infinite;
-    }
-    @keyframes marquee {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
-    }
-</style>

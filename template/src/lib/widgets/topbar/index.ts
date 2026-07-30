@@ -1,2 +1,1 @@
-export { default as Topbar } from './Topbar.svelte';
-export { MENU_ITEMS, VIEW_TABS } from './constants';
+export { MENU_ITEMS } from './constants';

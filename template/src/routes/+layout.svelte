@@ -9,15 +9,19 @@
 
 	let { children, data } = $props();
 
+	// +layout.ts's load already resolved `data` before this component was created,
+	// so set the store here (top-level script, not $effect) — $effect runs after
+	// the DOM (incl. children) has rendered, which is too late for consumers that
+	// read configStore during their own first render/onMount.
+	if (data.config) {
+		configStore.set(data.config);
+	}
+
 	onMount(() => initLocale());
 
 	$effect(() => {
-		// Set synchronously so children have config available on first render (SSR + CSR)
 		if (data.configError) {
 			snackStore.show({ type: ESnackType.DANGER, message: data.configError });
-		}
-		if (data.config) {
-			configStore.set(data.config);
 		}
 	});
 
